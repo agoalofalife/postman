@@ -1,0 +1,19 @@
+{
+    "name": "agoalofalife/shedule-email",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "agoalofalife",
+            "email": "agoalofalife@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "agoalofalife\\shedule-email\\":""
+        }
+    }
+}
