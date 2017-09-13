@@ -21,7 +21,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'shedule-email-migration');
+        ], 'postman-migration');
 
         $this->publishes([
             __DIR__.'/../config/shedulemail.php' => config_path('shedulemail.php'),

@@ -27,6 +27,7 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-
+        $this->call('postman:seed');
+        $this->call('vendor:publish', ['--tag' => 'postman-migration']);
     }
 }
