@@ -1,9 +1,14 @@
 <?php
 
-namespace Laravel\Passport;
+namespace Agoalofalife\SheduleEmail;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class SheduleEmailServiceProvider
+ *
+ * @package Laravel\Passport
+ */
 class SheduleEmailServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +18,11 @@ class SheduleEmailServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'shedule-email-migration');
     }
 
     /**
