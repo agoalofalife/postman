@@ -1,6 +1,5 @@
 <?php
-
-namespace Agoalofalife\SheduleEmail;
+namespace agoalofalife\postman;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +22,15 @@ class SheduleEmailServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'shedule-email-migration');
+
+        $this->publishes([
+            __DIR__.'/../config/shedulemail.php' => config_path('shedulemail.php'),
+        ]);
+
+        $this->commands([
+            Console\InstallCommand::class,
+            Console\SeederCommand::class,
+        ]);
     }
 
     /**

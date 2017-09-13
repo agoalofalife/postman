@@ -1,6 +1,6 @@
 <?php
 
-namespace Agoalofalife\SheduleEmail\Models;
+namespace agoalofalife\postman\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

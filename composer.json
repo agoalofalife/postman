@@ -1,5 +1,5 @@
 {
-    "name": "agoalofalife/shedule-email",
+    "name": "agoalofalife/postman",
     "description": "",
     "type": "library",
     "license": "MIT",
@@ -11,9 +11,14 @@
     ],
     "minimum-stability": "dev",
     "require": {},
-    "autoload":{
-        "psr-4":{
-            "Agoalofalife\\SheduleEmail\\":"src/"
+    "autoload": {
+        "psr-4": {
+            "agoalofalife\\postman\\":"src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     }
 }

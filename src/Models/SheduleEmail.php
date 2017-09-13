@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace agoalofalife\postman\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
