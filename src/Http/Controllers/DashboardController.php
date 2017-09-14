@@ -3,14 +3,24 @@
 namespace agoalofalife\postman\Http\Controllers;
 
 use agoalofalife\postman\Models\SheduleEmail;
-use agoalofalife\postman\Transformers\SheduleEmailTranformer;
 use App\User;
 
 class DashboardController
 {
     public function index()
     {
-        $data['tasks'] = SheduleEmailTranformer::transform(SheduleEmail::all());
+        $data['tasks'] =  SheduleEmail::all()->prepend([
+            trans('postman::dashboard.date'),
+            trans('postman::dashboard.theme'),
+            trans('postman::dashboard.text'),
+            trans('postman::dashboard.mode'),
+            trans('postman::dashboard.status'),
+        ]);
+
+        $data['users'] = User::all()->prepend([
+            trans('postman::dashboard.name'),
+            trans('postman::dashboard.email'),
+        ]);
 
         return response($data);
     }

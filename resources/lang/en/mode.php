@@ -7,5 +7,10 @@ return [
     'two' => [
         'name' => 'Each',
         'description' => 'A email is sent to all'
-    ]
+    ],
+
+
+    // status
+    'status_action_confirmed' => 'Confirmed',
+    'status_action_unconfirmed' => 'Unconfirmed',
 ];

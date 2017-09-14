@@ -83,6 +83,6 @@ class SheduleEmailServiceProvider extends ServiceProvider
      */
     protected function registerProvider()
     {
-        $this->app->register(TransformersServiceProvider::class);
+
     }
 }

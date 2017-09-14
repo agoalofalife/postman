@@ -7,5 +7,11 @@ return [
     'two' => [
         'name' => 'Каждому',
         'description' => 'Отдельно каждому отсылается письмо.'
-    ]
+    ],
+
+
+
+// status
+    'status_action_confirmed' => 'Подтвержлено',
+    'status_action_unconfirmed' => 'Неподтверждено',
 ];
