@@ -2,11 +2,15 @@
 namespace agoalofalife\postman\Modes;
 
 use agoalofalife\postman\Contract\Mode;
+use agoalofalife\postman\Models\SheduleEmail;
 
 class Each implements Mode
 {
 
-    public function postEmail()
+    /**
+     * @param SheduleEmail $shedule
+     */
+    public function postEmail(SheduleEmail $shedule)
     {
         // TODO: Implement postEmail() method.
     }

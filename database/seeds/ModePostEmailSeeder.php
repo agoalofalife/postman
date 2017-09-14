@@ -17,7 +17,7 @@ class ModePostEmailSeeder extends Seeder
     {
         ModePostEmail::firstOrCreate([
             'name' => 'One email at all',
-            'description' => 'All copies of the same email',
+            'description' => 'All copies of the same email (BCC)',
         ]);
 
         ModePostEmail::firstOrCreate([
