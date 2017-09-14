@@ -2,8 +2,7 @@
 namespace agoalofalife\postman;
 
 use Illuminate\Support\ServiceProvider;
-
-
+use Illuminate\Support\Facades\Route;
 /**
  * Class SheduleEmailServiceProvider
  *
@@ -11,6 +10,7 @@ use Illuminate\Support\ServiceProvider;
  */
 class SheduleEmailServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap the application services.
      *
@@ -25,14 +25,16 @@ class SheduleEmailServiceProvider extends ServiceProvider
         ], 'postman-migration');
 
         $this->publishes([
-            __DIR__.'/../config/shedulemail.php' => config_path('shedulemail.php'),
-        ]);
+            __DIR__.'/../config/postman.php' => config_path('postman.php'),
+        ], 'postman-migration');
 
+        $this->registerRoutes();
         $this->commands([
             Console\InstallCommand::class,
             Console\SeederCommand::class,
             Console\ParseCommand::class,
         ]);
+        $this->loadViews();
     }
 
     /**
@@ -45,4 +47,25 @@ class SheduleEmailServiceProvider extends ServiceProvider
 
     }
 
+    /**
+     * Register the postman routes.
+     *
+     * @return void
+     */
+    protected function registerRoutes()
+    {
+        Route::group([
+            'prefix' => 'postman',
+            'namespace' => 'agoalofalife\postman\Http\Controllers',
+            'middleware' => 'web',
+        ], function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        });
+    }
+
+
+    protected function loadViews()
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'postman');
+    }
 }
