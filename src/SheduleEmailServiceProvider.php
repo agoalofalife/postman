@@ -3,6 +3,7 @@ namespace agoalofalife\postman;
 
 use Illuminate\Support\ServiceProvider;
 
+
 /**
  * Class SheduleEmailServiceProvider
  *
@@ -30,6 +31,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
         $this->commands([
             Console\InstallCommand::class,
             Console\SeederCommand::class,
+            Console\ParseCommand::class,
         ]);
     }
 
