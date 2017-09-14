@@ -18,8 +18,24 @@ class SheduleEmail extends Model
     ];
 
 
+    /**
+     * Get the status action.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getStatusActionAttribute($value)
+    {
+        return boolval($value);
+    }
+
     public function email()
     {
         return $this->belongsTo(Email::class);
+    }
+
+    public function mode()
+    {
+        return $this->belongsTo(ModePostEmail::class);
     }
 }
