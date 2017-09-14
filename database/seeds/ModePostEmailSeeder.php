@@ -16,13 +16,13 @@ class ModePostEmailSeeder extends Seeder
     public function run()
     {
         ModePostEmail::firstOrCreate([
-            'name' => 'One email at all',
-            'description' => 'All copies of the same email (BCC)',
+            'name' => trans('postman::mode.one.name'),
+            'description' => trans('postman::mode.one.description'),
         ]);
 
         ModePostEmail::firstOrCreate([
-            'name' => 'Each',
-            'description' => 'A email is sent to all',
+            'name' => trans('postman::mode.two.name'),
+            'description' => trans('postman::mode.two.description'),
         ]);
     }
 }

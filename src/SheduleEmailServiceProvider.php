@@ -20,6 +20,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
     {
          $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'postman');
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'postman-migration');
@@ -27,6 +28,11 @@ class SheduleEmailServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/postman.php' => config_path('postman.php'),
         ], 'postman-migration');
+
+        $this->publishes([
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/postman'),
+        ], 'postman-migration');
+
 
         $this->registerRoutes();
         $this->commands([
