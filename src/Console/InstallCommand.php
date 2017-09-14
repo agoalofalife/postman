@@ -30,5 +30,7 @@ class InstallCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'postman-migration']);
         $this->call('migrate');
         $this->call('postman:seed');
+
+        $this->call('vendor:publish', ['--provider' => 'Themsaid\Transformers\TransformersServiceProvider']);
     }
 }

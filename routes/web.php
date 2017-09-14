@@ -3,5 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('index', 'HomeController@index');
-Route::get('users', 'HomeController@listUsers');
+Route::prefix('api')->group(function () {
+    Route::get('dashboard', 'DashboardController@index');
+    Route::get('users', 'DashboardController@listUsers');
+});

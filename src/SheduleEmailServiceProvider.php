@@ -3,6 +3,8 @@ namespace agoalofalife\postman;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Themsaid\Transformers\TransformersServiceProvider;
+
 /**
  * Class SheduleEmailServiceProvider
  *
@@ -41,6 +43,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
             Console\ParseCommand::class,
         ]);
         $this->loadViews();
+
     }
 
     /**
@@ -50,7 +53,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->registerProvider();
     }
 
     /**
@@ -73,5 +76,13 @@ class SheduleEmailServiceProvider extends ServiceProvider
     protected function loadViews()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'postman');
+    }
+
+    /**
+     * Register providers
+     */
+    protected function registerProvider()
+    {
+        $this->app->register(TransformersServiceProvider::class);
     }
 }

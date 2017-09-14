@@ -3,14 +3,16 @@
 namespace agoalofalife\postman\Http\Controllers;
 
 use agoalofalife\postman\Models\SheduleEmail;
-use App\Models\User;
+use agoalofalife\postman\Transformers\SheduleEmailTranformer;
+use App\User;
 
-class HomeController
+class DashboardController
 {
     public function index()
     {
-        $data['tasks'] = SheduleEmail::all();
-        return view('postman::index', $data);
+        $data['tasks'] = SheduleEmailTranformer::transform(SheduleEmail::all());
+
+        return response($data);
     }
 
     public function listUsers()

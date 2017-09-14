@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "themsaid/laravel-model-transformers": "^1.1"
+    },
     "autoload": {
         "psr-4": {
             "agoalofalife\\postman\\":"src/"
