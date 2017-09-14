@@ -9,4 +9,6 @@ php artisan postman:install
  if (config('posman.switcher')) {
     $schedule->command(ParseCommand::class)->everyMinute();
   }
+  
+  locale in config.php (seed)
 ```
