@@ -17,7 +17,6 @@ class Parser
     {
         $now = Carbon::now();
 
-
          SheduleEmail::whereRaw('CAST(date AS Datetime) <= ? AND status_action = ?', [$now, 0])->get()
                     ->each(function ($value) {
                         $mode = FactoryMode::get($value->mode_id);
