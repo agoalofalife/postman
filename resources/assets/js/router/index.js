@@ -11,5 +11,9 @@ export default new Router({
             path: '/',
             redirect: '/dashboard',
         },
+        {
+            path: '/dashboard',
+            component: require('../pages/Dashboard.vue'),
+        },
     ],
 })

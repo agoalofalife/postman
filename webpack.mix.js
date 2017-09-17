@@ -15,8 +15,8 @@ const webpack = require('webpack');
 mix
     .setPublicPath('public')
     .js('resources/assets/js/app.js', 'public/js')
-    .less('resources/assets/less/app.less', 'public/css')
-    .copy('resources/assets/img', 'public/img')
+    // .less('resources/assets/less/app.less', 'public/css')
+    // .copy('resources/assets/img', 'public/img')
     .sourceMaps()
     .copy('public', '../../../public/vendor/postman')
     .version();
