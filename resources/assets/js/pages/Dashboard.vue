@@ -6,49 +6,24 @@
             border
             style="width: 100%">
         <el-table-column
-                fixed
-                prop="number"
-                label="№"
-                width="40">
+        fixed
+        prop="number"
+        label="№"
+        width="40">
         </el-table-column>
-        <el-table-column
-                fixed
-                prop="dateStart"
-                label="Date start"
-                width="170">
-        </el-table-column>
-        <el-table-column
-                prop="theme"
-                label="Theme"
-                width="180">
-        </el-table-column>
-        <el-table-column
-                prop="text"
-                label="Text"
-                width="400">
-        </el-table-column>
-        <el-table-column
-                prop="mode"
-                label="Mode"
-                width="130">
-        </el-table-column>
-        <el-table-column
-                prop="status"
-                label="Status"
-                width="120">
-        </el-table-column>
-        <el-table-column
-                prop="updateAt"
-                label="Update At"
-                width="120">
+        <el-table-column v-for="column in columns"
+                         :key="column.prop"
+                         :prop="column.prop"
+                         :label="column.label"
+                         :width="column.size">
         </el-table-column>
         <el-table-column
                 fixed="right"
                 label="Operations"
                 width="120">
             <template scope="scope">
-                <el-button @click="handleClick" type="text" size="small">Detail</el-button>
-                <el-button type="text" size="small">Edit</el-button>
+                <el-button @click="handleClick" type="text" size="small">{{buttonEdit}}</el-button>
+                <el-button type="text" size="small">{{ buttonRemove }}</el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -70,16 +45,37 @@
         },
         data() {
             return {
+                buttonEdit:'',
+                buttonRemove:'',
+                columns:[],
                 tableData: [{
                     number: '1',
-                    dateStart: '2016-05-03 12:42',
+                    date: '2016-05-03 12:42',
                     theme: 'California',
                     text: 'Los Angeles',
                     mode: 'Every',
                     status: 'Success',
                     updateAt: '2016-05-03'
-                }]
+                }],
             }
+        },
+        mounted: function () {
+                this.$http.get('/postman/api/dashboard.table.column')
+                    .then(response => {
+                        console.log(response)
+                        this.buttonEdit = response.data.button.edit;
+                        this.buttonRemove = response.data.button.remove;
+                        this.columns = response.data.columns
+//                        this.stats = response.data;
+//
+//                        if (_.values(response.data.wait)[0]) {
+//                            this.stats.max_wait_time = _.values(response.data.wait)[0];
+//                            this.stats.max_wait_queue = _.keys(response.data.wait)[0].split(':')[1];
+//                        }
+
+//                        this.loadingStats = false;
+                    });
         }
     }
+
 </script>
