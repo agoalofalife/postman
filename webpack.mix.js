@@ -15,10 +15,13 @@ const webpack = require('webpack');
 mix
     .setPublicPath('public')
     .js('resources/assets/js/app.js', 'public/js')
-    // .less('resources/assets/less/app.less', 'public/css')
+    // .copyDirectory(
+    //     'public/fonts/vendor',
+    //     'public/fonts/vendor'
+    // )
     // .copy('resources/assets/img', 'public/img')
+    // .copyDirectory('public/fonts', 'public/fonts')
     .sourceMaps()
-    .copy('public', '../../../public/vendor/postman')
     .version();
 
 

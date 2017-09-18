@@ -1,7 +1,12 @@
 <template>
+    <div>
     <el-row class="table-postman">
         <el-col :span="16" :offset="4">
-    <el-table
+            <i class="el-icon-loading"></i>
+        </el-col>
+
+        <el-col :span="16" :offset="4" v-show="false">
+            <el-table
             :data="tableData"
             border
             style="width: 100%">
@@ -29,13 +34,16 @@
     </el-table>
         </el-col>
         </el-row>
+    </div>
 </template>
 
 <style>
     .table-postman{
         margin-top: 7%;
     }
+
 </style>
+
 <script>
     export default {
         methods: {
