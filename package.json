@@ -12,8 +12,6 @@
   "dependencies": {
     "axios": "^0.15.3",
     "element-ui": "^1.4.4",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.5",
     "lodash": "^4.16.2",
     "phpunserialize": "1.*",
     "vue": "^2.2.0",
@@ -22,6 +20,6 @@
   "devDependencies": {
     "cross-env": "^5.0.1",
     "es6-promise": "^4.0.5",
-    "laravel-mix": "^1.4.2"
+    "laravel-mix": "^1.4.3"
   }
 }

@@ -3,9 +3,11 @@
 namespace agoalofalife\postman\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SheduleEmail extends Model
 {
+    use SoftDeletes;
     protected $fillable = ['date' , 'email_id', 'mode_id'];
 
     /**
