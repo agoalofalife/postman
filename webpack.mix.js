@@ -19,9 +19,9 @@ mix
     //     'public/fonts/vendor',
     //     'public/fonts/vendor'
     // )
+    .copy('public', '../../../public/vendor/postman')
     // .copy('resources/assets/img', 'public/img')
-    // .copyDirectory('public/fonts', 'public/fonts')
-    .copy('public', '../../../public/vendor/postman') 
+    // .copyDirectory('public/fonts', 'public/fonts') 
     .sourceMaps()
 
     .version();
