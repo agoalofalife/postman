@@ -1,11 +1,11 @@
 <template>
     <div>
     <el-row class="table-postman">
-        <el-col :span="16" :offset="4">
+        <el-col :span="16" :offset="11" v-show="!flagFetchData">
             <i class="el-icon-loading"></i>
         </el-col>
 
-        <el-col :span="16" :offset="4" v-show="false">
+        <el-col :span="16" :offset="4" v-show="flagFetchData">
             <el-table
             :data="tableData"
             border
@@ -53,6 +53,7 @@
         },
         data() {
             return {
+                flagFetchData:false,
                 buttonEdit:'',
                 buttonRemove:'',
                 columns:[],
@@ -74,6 +75,7 @@
                         this.buttonEdit = response.data.button.edit;
                         this.buttonRemove = response.data.button.remove;
                         this.columns = response.data.columns
+                        this.flagFetchData = true;
 //                        this.stats = response.data;
 //
 //                        if (_.values(response.data.wait)[0]) {
