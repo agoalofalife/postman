@@ -28,7 +28,10 @@ class SheduleEmail extends Model
      */
     public function getStatusActionAttribute($value)
     {
-        return boolval($value);
+
+
+        // dd("postman::dashboard.status_action." + boolval($value));
+        return trans("postman::dashboard.status_action." . $value);
     }
 
     public function email()

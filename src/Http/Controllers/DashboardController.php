@@ -8,32 +8,20 @@ use App\User;
 class DashboardController
 {
     protected $nameColumns = [
-        'date' => 170,
-        'theme' => 180,
-        'text' => 400,
-        'mode' => 130,
-        'status' => 120,
-        'updateAt' => 120
+        'id' => 40,
+        'date' => 180,
+        'email.theme' => 180,
+        'email.text' => 400,
+        'mode.name' => 130,
+        'status_action' => 120,
+        'updated_at' => 120,
     ];
 
     public function index()
     {
-
-//        $data['tasks'] =  SheduleEmail::all()->prepend([
-//            trans('postman::dashboard.date'),
-//            trans('postman::dashboard.theme'),
-//            trans('postman::dashboard.text'),
-//            trans('postman::dashboard.mode'),
-//            trans('postman::dashboard.status'),
-//        ]);
-//
-//        $data['users'] = User::all()->prepend([
-//            trans('postman::dashboard.name'),
-//            trans('postman::dashboard.email'),
-//        ]);
-//
-//        return response($data);
+        return SheduleEmail::with('email')->with('mode')->get();
     }
+
 
     /**
      * Get table column
@@ -49,14 +37,12 @@ class DashboardController
                 'label' => trans("postman::dashboard.{$column}")
             ];
         }
+        
         $response['button'] = [
             'edit' => trans('postman::dashboard.button.edit'),
             'remove' => trans('postman::dashboard.button.remove'),
         ];
         return response()->json($response);
     }
-    public function listUsers()
-    {
-        return User::all()->toJson();
-    }
+
 }

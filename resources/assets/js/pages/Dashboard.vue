@@ -10,18 +10,22 @@
             :data="tableData"
             border
             style="width: 100%">
-        <el-table-column
+
+       <!--  <el-table-column
         fixed
         prop="number"
         label="№"
         width="40">
-        </el-table-column>
-        <el-table-column v-for="column in columns"
+        </el-table-column> -->
+
+        <el-table-column v-for="(column, index) in columns"
                          :key="column.prop"
                          :prop="column.prop"
                          :label="column.label"
                          :width="column.size">
         </el-table-column>
+
+
         <el-table-column
                 fixed="right"
                 label="Operations"
@@ -57,25 +61,32 @@
                 buttonEdit:'',
                 buttonRemove:'',
                 columns:[],
-                tableData: [{
-                    number: '1',
-                    date: '2016-05-03 12:42',
-                    theme: 'California',
-                    text: 'Los Angeles',
-                    mode: 'Every',
-                    status: 'Success',
-                    updateAt: '2016-05-03'
-                }],
+                // tableData: [{
+                //     number: '1',
+                //     date: '2016-05-03 12:42',
+                //     theme: 'California',
+                //     text: 'Los Angeles',
+                //     mode: 'Every',
+                //     status: 'Success',
+                //     updateAt: '2016-05-03'
+                // }],
+                tableData:[],
             }
         },
         mounted: function () {
                 this.$http.get('/postman/api/dashboard.table.column')
                     .then(response => {
-                        console.log(response)
                         this.buttonEdit = response.data.button.edit;
                         this.buttonRemove = response.data.button.remove;
                         this.columns = response.data.columns
-                        this.flagFetchData = true;
+                        
+
+                     this.$http.get('/postman/api/dashboard.table.tasks')
+                        .then(response => {
+                            this.tableData = response.data
+                            console.log(response.data)
+                            this.flagFetchData = true;
+                        })
 //                        this.stats = response.data;
 //
 //                        if (_.values(response.data.wait)[0]) {

@@ -1,16 +1,21 @@
 <?php
 
-return [
+return №
+    'id' => '№',
     'date' => 'Date of sending email',
-    'theme' => 'Subject email',
-    'text' => 'Text email',
-    'mode' => 'Type of sending',
-    'status' => 'Send status email',
-    'updateAt' => 'Update At',
+    'email.theme' => 'Subject email',
+    'email.text' => 'Text email',
+    'mode.name' => 'Type of sending',
+    'status_action' => 'Send status email',
+    'updated_at' => 'Update At',
     'button.edit' => 'Edit',
     'button.remove' => 'Remove',
     'operations' => 'Operations',
     // user
     'email' => 'Email user',
-    'name' => 'Name user'
+    'name' => 'Name user',
+
+    // transformer
+    'status_action.1' = 'Done',
+    'status_action.0' = 'In process',
 ];

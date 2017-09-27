@@ -1,17 +1,22 @@
 <?php
 
 return [
+    'id' => '№',
     'date' => 'Дата отправки',
-    'theme' => 'Тема',
-    'text' => 'Текст',
-    'mode' => 'Тип отправки',
-    'status' => 'Статус',
-    'updateAt' => 'Активность',
+    'email.theme' => 'Тема',
+    'email.text' => 'Текст',
+    'mode.name' => 'Тип отправки',
+    'status_action' => 'Статус',
+    'updated_at' => 'Активность',
     'button.edit' => 'Редактировать',
     'button.remove' => 'Удалить',
     'operations' => 'Операции',
 
         // user
     'email' => 'Email пользователя',
-    'name' => 'Имя пользователя'
+    'name' => 'Имя пользователя',
+
+       // transformer
+    'status_action.1' => 'Сделано',
+    'status_action.0' => 'В процессе',
 ];
