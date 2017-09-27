@@ -11,13 +11,6 @@
             border
             style="width: 100%">
 
-       <!--  <el-table-column
-        fixed
-        prop="number"
-        label="№"
-        width="40">
-        </el-table-column> -->
-
         <el-table-column v-for="(column, index) in columns"
                          :key="column.prop"
                          :prop="column.prop"
