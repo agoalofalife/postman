@@ -5,7 +5,7 @@
             <i class="el-icon-loading"></i>
         </el-col>
 
-        <el-col :span="16" :offset="4" v-show="flagFetchData">
+        <el-col :span="18" :offset="3" v-show="flagFetchData">
             <el-table
             :data="tableData"
             border
@@ -24,64 +24,66 @@
                 label="Operations"
                 width="120">
             <template scope="scope">
-                <el-button @click="handleClick" type="text" size="small">{{buttonEdit}}</el-button>
+                <el-button @click="chooseRow" type="text" size="small">{{buttonEdit}}</el-button>
                 <el-button type="text" size="small">{{ buttonRemove }}</el-button>
             </template>
         </el-table-column></el-table>
         </el-col>
-        </el-row>
+
+        <el-col  :span="18" :offset="3" v-show="flagChooseRow" class="form-edit">
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+                <el-form-item label="Activity name" prop="name">
+                    <el-input v-model="ruleForm.name"></el-input>
+                </el-form-item>
+                <el-form-item label="Activity zone" prop="region">
+                    <el-select v-model="ruleForm.region" placeholder="Activity zone">
+                        <el-option label="Zone one" value="shanghai"></el-option>
+                        <el-option label="Zone two" value="beijing"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="Activity time" required>
+                    <el-col :span="11">
+                        <el-form-item prop="date1">
+                            <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                    <el-col class="line" :span="2">-</el-col>
+                    <el-col :span="11">
+                        <el-form-item prop="date2">
+                            <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+                        </el-form-item>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="Instant delivery" prop="delivery">
+                    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+                </el-form-item>
+                <el-form-item label="Activity type" prop="type">
+                    <el-checkbox-group v-model="ruleForm.type">
+                        <el-checkbox label="Online activities" name="type"></el-checkbox>
+                        <el-checkbox label="Promotion activities" name="type"></el-checkbox>
+                        <el-checkbox label="Offline activities" name="type"></el-checkbox>
+                        <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+                <el-form-item label="Resources" prop="resource">
+                    <el-radio-group v-model="ruleForm.resource">
+                        <el-radio label="Sponsorship"></el-radio>
+                        <el-radio label="Venue"></el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="Activity form" prop="desc">
+                    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
+                    <el-button @click="resetForm('ruleForm')">Reset</el-button>
+                </el-form-item>
+            </el-form>
+        </el-col>
+    </el-row>
 
 
- <el-row  :span="16" :offset="11">
- <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-  <el-form-item label="Activity name" prop="name">
-    <el-input v-model="ruleForm.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity zone" prop="region">
-    <el-select v-model="ruleForm.region" placeholder="Activity zone">
-      <el-option label="Zone one" value="shanghai"></el-option>
-      <el-option label="Zone two" value="beijing"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="Activity time" required>
-    <el-col :span="11">
-      <el-form-item prop="date1">
-        <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-      </el-form-item>
-    </el-col>
-    <el-col class="line" :span="2">-</el-col>
-    <el-col :span="11">
-      <el-form-item prop="date2">
-        <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-      </el-form-item>
-    </el-col>
-  </el-form-item>
-  <el-form-item label="Instant delivery" prop="delivery">
-    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
-  </el-form-item>
-  <el-form-item label="Activity type" prop="type">
-    <el-checkbox-group v-model="ruleForm.type">
-      <el-checkbox label="Online activities" name="type"></el-checkbox>
-      <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-      <el-checkbox label="Offline activities" name="type"></el-checkbox>
-      <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-    </el-checkbox-group>
-  </el-form-item>
-  <el-form-item label="Resources" prop="resource">
-    <el-radio-group v-model="ruleForm.resource">
-      <el-radio label="Sponsorship"></el-radio>
-      <el-radio label="Venue"></el-radio>
-    </el-radio-group>
-  </el-form-item>
-  <el-form-item label="Activity form" prop="desc">
-    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
-    <el-button @click="resetForm('ruleForm')">Reset</el-button>
-  </el-form-item>
-</el-form>
-        </el-row>
+
     </div>
 </template>
 
@@ -89,33 +91,36 @@
     .table-postman{
         margin-top: 7%;
     }
-
+    .form-edit{
+        margin-top: 2%
+    }
 </style>
 
 <script>
     export default {
         methods: {
-            handleClick() {
-                console.log('click');
+            chooseRow() {
+                this.flagChooseRow = !this.flagChooseRow
             }
         },
         data() {
             return {
                 flagFetchData:false,
+                flagChooseRow:false,
                 buttonEdit:'',
                 buttonRemove:'',
                 columns:[],
                 tableData:[],
                ruleForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
+                  name: '',
+                  region: '',
+                  date1: '',
+                  date2: '',
+                  delivery: false,
+                  type: [],
+                  resource: '',
+                  desc: ''
+                },
           rules: {
           name: [
             { required: true, message: 'Please input Activity name', trigger: 'blur' },
@@ -152,21 +157,12 @@
                         this.columns = response.data.columns
                         
 
-                     this.$http.get('/postman/api/dashboard.table.tasks')
-                        .then(response => {
-                            this.tableData = response.data
-                            console.log(response.data)
-                            this.flagFetchData = true;
-                        })
-//                        this.stats = response.data;
-//
-//                        if (_.values(response.data.wait)[0]) {
-//                            this.stats.max_wait_time = _.values(response.data.wait)[0];
-//                            this.stats.max_wait_queue = _.keys(response.data.wait)[0].split(':')[1];
-//                        }
-
-//                        this.loadingStats = false;
-                    });
+                 this.$http.get('/postman/api/dashboard.table.tasks')
+                    .then(response => {
+                        this.tableData = response.data
+                        this.flagFetchData = true;
+                    })
+                });
         }
     }
 
