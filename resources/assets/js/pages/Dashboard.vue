@@ -32,28 +32,27 @@
 
         <el-col  :span="18" :offset="3" v-show="flagChooseRow" class="form-edit">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                <el-form-item label="Activity name" prop="name">
-                    <el-input v-model="ruleForm.name"></el-input>
+                <el-form-item label="Дата отправки" prop="date">
+                    <el-date-picker type="datetime" v-model="ruleForm.date"></el-date-picker>
                 </el-form-item>
+                <el-form-item label="Тема" prop="theme">
+                <el-input placeholder="Please input" v-model="theme"></el-input>
+                </el-form-item>
+
+                <el-form-item label="Текст" prop="text">
+                    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                </el-form-item>
+
+
                 <el-form-item label="Activity zone" prop="region">
                     <el-select v-model="ruleForm.region" placeholder="Activity zone">
                         <el-option label="Zone one" value="shanghai"></el-option>
                         <el-option label="Zone two" value="beijing"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="Activity time" required>
-                    <el-col :span="11">
-                        <el-form-item prop="date1">
-                            <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-                        </el-form-item>
-                    </el-col>
-                    <el-col class="line" :span="2">-</el-col>
-                    <el-col :span="11">
-                        <el-form-item prop="date2">
-                            <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-                        </el-form-item>
-                    </el-col>
-                </el-form-item>
+
+
+
                 <el-form-item label="Instant delivery" prop="delivery">
                     <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
                 </el-form-item>
@@ -71,9 +70,7 @@
                         <el-radio label="Venue"></el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item label="Activity form" prop="desc">
-                    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-                </el-form-item>
+
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
                     <el-button @click="resetForm('ruleForm')">Reset</el-button>
@@ -111,17 +108,17 @@
                 buttonRemove:'',
                 columns:[],
                 tableData:[],
-               ruleForm: {
-                  name: '',
-                  region: '',
-                  date1: '',
+                ruleForm: {
+                  date: '',
+                  theme: '',
+                  text: '',
                   date2: '',
                   delivery: false,
                   type: [],
                   resource: '',
                   desc: ''
                 },
-          rules: {
+                rules: {
           name: [
             { required: true, message: 'Please input Activity name', trigger: 'blur' },
             { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
@@ -147,8 +144,6 @@
         },
             }
         },
-        
-    
         mounted: function () {
                 this.$http.get('/postman/api/dashboard.table.column')
                     .then(response => {
@@ -159,8 +154,9 @@
 
                  this.$http.get('/postman/api/dashboard.table.tasks')
                     .then(response => {
-                        this.tableData = response.data
+                        this.tableData = response.data;
                         this.flagFetchData = true;
+                        console.log(this)
                     })
                 });
         }

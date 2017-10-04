@@ -1,6 +1,6 @@
 <?php
 
-return №
+return [
     'id' => '№',
     'date' => 'Date of sending email',
     'email.theme' => 'Subject email',
@@ -16,6 +16,6 @@ return №
     'name' => 'Name user',
 
     // transformer
-    'status_action.1' = 'Done',
-    'status_action.0' = 'In process',
+    'status_action.1' => 'Done',
+    'status_action.0' => 'In process',
 ];

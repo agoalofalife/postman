@@ -45,6 +45,30 @@ class DashboardController
         return response()->json($response);
     }
 
+    public function formColumn()
+    {
+        $forms = [
+           'date' =>  [
+                'label' => trans('postman::dashboard.date'),
+                'type'  => '',
+                'rule' => [
+                    'required'=> true, 'message'=> 'Please input Activity name', 'trigger'=> 'blur',
+                ]
+            ],
+            [
+                'label' => trans('postman::dashboard.email.theme'),
+            ],
+            [
+                'label' => trans('postman::dashboard.email.text'),
+            ],
+            [
+                'label' => trans('postman::dashboard.status_action'),
+            ],
+            [
+                'label' => trans('postman::dashboard.mode.updated_at'),
+            ],
+        ];
+    }
     /**
      * @param $id
      */
