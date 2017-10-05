@@ -88,13 +88,12 @@
                 }).then(() => {
                     console.log( index, row );
                     this.$http.delete('/postman/api/dashboard.table.tasks.remove/' + row.id)
-                        .then(response => {
+                        .then(() => {
                             this.tableData.splice(index, 1);
                             this.$message({
                                 type: 'success',
                                 message: this.form.popup['success.message']
                             });
-
                         })
                         .catch((response) => {
                            console.warn( response );
