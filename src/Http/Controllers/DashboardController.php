@@ -23,10 +23,15 @@ class DashboardController
         return SheduleEmail::with('email')->with('mode')->get();
     }
 
+    /**
+     * Get list modes
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function listMode()
     {
         return response()->json(ModePostEmail::all());
     }
+
     /**
      * Get table column
      * @return \Illuminate\Http\JsonResponse
@@ -49,6 +54,10 @@ class DashboardController
         return response()->json($response);
     }
 
+    /**
+     * Base this is text for form
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function formColumn()
     {
         $forms = [

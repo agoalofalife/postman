@@ -45,19 +45,18 @@
                     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
                 </el-form-item>
 
+                <el-form-item :label="form.type.label" prop="mode">
+                    <el-select v-model="ruleForm.mode" :placeholder="form.type.placeholder">
+                        <el-tooltip v-for="mode in listMode" :key="mode.id" :content="mode.description" placement="top">
+                            <el-option :label="mode.name" :value="mode.id"></el-option>
+                        </el-tooltip>
 
-                <el-form-item :label="form.type.label" prop="type">
-                    <el-select v-model="ruleForm.region" :placeholder="form.type.placeholder" name="mode" >
-                        <el-option v-for="mode in listMode" :key="mode.id" :label="mode.name" :value="mode.id"></el-option>
-
-                        <!--<el-option label="Один на всех" value="shanghai"></el-option>-->
-                        <!--<el-option label="Каждому" value="beijing"></el-option>-->
                     </el-select>
                 </el-form-item>
 
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm')">{{ form.button.success }} </el-button>
-                    <el-button @click="canselForm">{{ form.button.cancel }} </el-button>
+                    <el-button @click="cancelForm">{{ form.button.cancel }} </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -81,7 +80,7 @@
             chooseRowEdit() {
                 this.flagChooseRow = !this.flagChooseRow;
             },
-            canselForm() {
+            cancelForm() {
                 this.flagChooseRow = false;
             }
         },
@@ -118,11 +117,11 @@
                   date: '',
                   theme: '',
                   text: '',
-                  type: [],
+                  mode: '',
                   resource: '',
                 },
                 rules: {
-          name: [
+          date: [
             { required: true, message: 'Please input Activity name', trigger: 'blur' },
             { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
           ],
