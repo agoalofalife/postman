@@ -24,4 +24,12 @@ return [
 
     'form.button.success' => 'Save',
     'form.button.cancel' => 'Cancel',
+
+    'popup.question' => 'Are you sure you want to remove?',
+    'popup.title' => 'Window',
+    'popup.confirmButtonText' => 'Yes',
+    'popup.cancelButtonText' => 'Cansel',
+    'popup.success.message' => 'Delete completed',
+    'popup.info.message' => 'Delete canceled',
+
 ];

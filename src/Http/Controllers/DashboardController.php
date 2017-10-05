@@ -80,10 +80,19 @@ class DashboardController
             'button' => [
                 'success' => trans('postman::dashboard.form.button.success'),
                 'cancel' => trans('postman::dashboard.form.button.cancel'),
-            ]
+            ],
+            'popup' => [
+              'question' => trans('postman::dashboard.popup.question'),
+              'title' => trans('postman::dashboard.popup.title'),
+              'confirmButtonText' => trans('postman::dashboard.popup.confirmButtonText'),
+              'cancelButtonText' => trans('postman::dashboard.popup.cancelButtonText'),
+              'success.message' => trans('postman::dashboard.popup.success.message'),
+              'info.message' => trans('postman::dashboard.popup.info.message'),
+            ],
         ];
         return response()->json($forms);
     }
+
     /**
      * @param $id
      */

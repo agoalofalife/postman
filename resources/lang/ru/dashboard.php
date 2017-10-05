@@ -25,4 +25,11 @@ return [
 
     'form.button.success' => 'Добавить',
     'form.button.cancel' => 'Отмена',
+
+    'popup.question' => 'Вы уверены что хотите удалить?',
+    'popup.title' => 'Вопрос',
+    'popup.confirmButtonText' => 'Да',
+    'popup.cancelButtonText' => 'Отмена',
+    'popup.success.message' => 'Успешно удалено',
+    'popup.info.message' => 'Отмена',
 ];
