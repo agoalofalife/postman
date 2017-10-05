@@ -8,7 +8,7 @@ Route::prefix('api')->group(function () {
     Route::get('dashboard.table.formColumn', 'DashboardController@formColumn');
     Route::get('dashboard.table.tasks', 'DashboardController@index');
     Route::get('dashboard.table.listMode', 'DashboardController@listMode');
-    Route::get('dashboard.table.tasks.remove', 'DashboardController@remove');
+    Route::delete('dashboard.table.tasks.remove/{id}', 'DashboardController@remove');
 });
 
 

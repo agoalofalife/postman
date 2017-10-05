@@ -95,9 +95,11 @@ class DashboardController
 
     /**
      * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function remove()
+    public function remove($id)
     {
-
+        SheduleEmail::destroy($id);
+        return response()->json(true);
     }
 }

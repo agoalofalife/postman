@@ -14,22 +14,22 @@
             border
             style="width: 100%">
 
-        <el-table-column v-for="(column, index) in columns"
+            <el-table-column v-for="(column, index) in columns"
                          :key="column.prop"
                          :prop="column.prop"
                          :label="column.label"
                          :width="column.size">
         </el-table-column>
-
-        <el-table-column
-                fixed="right"
-                label="Operations"
-                width="120">
-            <template scope="scope">
-                <el-button @click="chooseRowEdit" type="text" size="small">{{buttonEdit}}</el-button>
-                <el-button @click="chooseRowRemove" type="text" size="small">{{ buttonRemove }}</el-button>
-            </template>
-        </el-table-column></el-table>
+            <el-table-column
+                    fixed="right"
+                    label="Operations"
+                    width="120">
+                <template scope="scope">
+                    <el-button @click="chooseRowEdit" type="text" size="small">{{buttonEdit}}</el-button>
+                    <el-button @click="chooseRowRemove(scope.$index, scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
+                </template>
+            </el-table-column>
+            </el-table>
         </el-col>
 
         <el-col  :span="18" :offset="3" v-show="flagChooseRow" class="form-edit">
@@ -80,16 +80,26 @@
             chooseRowEdit() {
                 this.flagChooseRow = !this.flagChooseRow;
             },
-            chooseRowRemove() {
+            chooseRowRemove(index, row) {
                 this.$confirm(this.form.popup.question, this.form.popup.title, {
                     confirmButtonText: this.form.popup.confirmButtonText,
                     cancelButtonText: this.form.popup.cancelButtonText,
                     type: 'warning'
                 }).then(() => {
-                    this.$message({
-                        type: 'success',
-                        message: this.form.popup['success.message']
-                    });
+                    console.log( index, row );
+                    this.$http.delete('/postman/api/dashboard.table.tasks.remove/' + row.id)
+                        .then(response => {
+                            this.tableData.splice(index, 1);
+                            this.$message({
+                                type: 'success',
+                                message: this.form.popup['success.message']
+                            });
+
+                        })
+                        .catch((response) => {
+                           console.warn( response );
+                        })
+
                 }).catch(() => {
                     this.$message({
                         type: 'info',
