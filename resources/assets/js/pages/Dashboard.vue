@@ -1,8 +1,11 @@
 <template>
     <div>
     <el-row class="table-postman">
-        <el-col :span="16" :offset="11" v-show="!flagFetchData">
+        <el-col :span="16" :offset="11" v-show="!flagFetchData && !flagFetchError">
             <i class="el-icon-loading"></i>
+        </el-col>
+        <el-col :span="16" :offset="11" v-show="flagFetchError">
+            <h4>Error</h4>
         </el-col>
 
         <el-col :span="18" :offset="3" v-show="flagFetchData">
@@ -18,13 +21,12 @@
                          :width="column.size">
         </el-table-column>
 
-
         <el-table-column
                 fixed="right"
                 label="Operations"
                 width="120">
             <template scope="scope">
-                <el-button @click="chooseRow" type="text" size="small">{{buttonEdit}}</el-button>
+                <el-button @click="chooseRowEdit" type="text" size="small">{{buttonEdit}}</el-button>
                 <el-button type="text" size="small">{{ buttonRemove }}</el-button>
             </template>
         </el-table-column></el-table>
@@ -32,28 +34,30 @@
 
         <el-col  :span="18" :offset="3" v-show="flagChooseRow" class="form-edit">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                <el-form-item label="Дата отправки" prop="date">
+                <el-form-item :label="form.date.label" prop="date">
                     <el-date-picker type="datetime" v-model="ruleForm.date"></el-date-picker>
                 </el-form-item>
-                <el-form-item label="Тема" prop="theme">
-                <el-input placeholder="Please input" v-model="ruleForm.theme"></el-input>
+                <el-form-item :label="form.theme.label" prop="theme">
+                <el-input placeholder="" v-model="ruleForm.theme"></el-input>
                 </el-form-item>
 
-                <el-form-item label="Текст" prop="text">
+                <el-form-item :label="form.text.label" prop="text">
                     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
                 </el-form-item>
 
 
-                <el-form-item label="Тип отправки" prop="type">
-                    <el-select v-model="ruleForm.region" placeholder="Выбрать тип">
-                        <el-option label="Один на всех" value="shanghai"></el-option>
-                        <el-option label="Каждому" value="beijing"></el-option>
+                <el-form-item :label="form.type.label" prop="type">
+                    <el-select v-model="ruleForm.region" :placeholder="form.type.placeholder" name="mode" >
+                        <el-option v-for="mode in listMode" :key="mode.id" :label="mode.name" :value="mode.id"></el-option>
+
+                        <!--<el-option label="Один на всех" value="shanghai"></el-option>-->
+                        <!--<el-option label="Каждому" value="beijing"></el-option>-->
                     </el-select>
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">Добавить</el-button>
-                    <el-button @click="canselForm">Отмена</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')">{{ form.button.success }} </el-button>
+                    <el-button @click="canselForm">{{ form.button.cancel }} </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -74,30 +78,48 @@
 <script>
     export default {
         methods: {
-            chooseRow() {
-                this.flagChooseRow = !this.flagChooseRow
+            chooseRowEdit() {
+                this.flagChooseRow = !this.flagChooseRow;
             },
             canselForm() {
-
+                this.flagChooseRow = false;
             }
         },
         data() {
             return {
                 flagFetchData:false,
+                flagFetchError:false,
                 flagChooseRow:false,
                 buttonEdit:'',
                 buttonRemove:'',
                 columns:[],
                 tableData:[],
+                listMode:[],
+                form:{
+                    date : {
+                        label : 'Date of sending email'
+                    },
+                    theme:{
+                        label:'Subject email',
+                    },
+                    text : {
+                        label:'Text email',
+                    },
+                    type : {
+                        placeholder:'Choose',
+                        label :'Type of sending'
+                    },
+                    button : {
+                        success : 'Success',
+                        cancel:'Cancel',
+                    }
+                },
                 ruleForm: {
                   date: '',
                   theme: '',
                   text: '',
-                  date2: '',
-                  delivery: false,
                   type: [],
                   resource: '',
-                  desc: ''
                 },
                 rules: {
           name: [
@@ -137,9 +159,22 @@
                     .then(response => {
                         this.tableData = response.data;
                         this.flagFetchData = true;
-                        console.log(this)
                     })
+                     .catch(() => {
+                            this.flagFetchError = true
+                     })
                 });
+        },
+        created: function () {
+            this.$http.get('/postman/api/dashboard.table.formColumn')
+                .then(response => {
+                    this.form = response.data
+                });
+
+            this.$http.get('/postman/api/dashboard.table.listMode')
+                .then(response => {
+                    this.listMode = response.data
+                })
         }
     }
 

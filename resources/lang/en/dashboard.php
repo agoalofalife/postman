@@ -5,7 +5,10 @@ return [
     'date' => 'Date of sending email',
     'email.theme' => 'Subject email',
     'email.text' => 'Text email',
+
     'mode.name' => 'Type of sending',
+    'mode.placeholder' => 'Choose',
+
     'status_action' => 'Send status email',
     'updated_at' => 'Update At',
     'button.edit' => 'Edit',
@@ -18,4 +21,7 @@ return [
     // transformer
     'status_action.1' => 'Done',
     'status_action.0' => 'In process',
+
+    'form.button.success' => 'Save',
+    'form.button.cancel' => 'Cancel',
 ];

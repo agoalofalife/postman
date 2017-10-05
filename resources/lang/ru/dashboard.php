@@ -5,7 +5,10 @@ return [
     'date' => 'Дата отправки',
     'email.theme' => 'Тема',
     'email.text' => 'Текст',
+
     'mode.name' => 'Тип отправки',
+    'mode.placeholder' => 'Выбрать тип',
+
     'status_action' => 'Статус',
     'updated_at' => 'Активность',
     'button.edit' => 'Редактировать',
@@ -19,4 +22,7 @@ return [
        // transformer
     'status_action.1' => 'Сделано',
     'status_action.0' => 'В процессе',
+
+    'form.button.success' => 'Добавить',
+    'form.button.cancel' => 'Отмена',
 ];

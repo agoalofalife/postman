@@ -2,6 +2,7 @@
 
 namespace agoalofalife\postman\Http\Controllers;
 
+use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
 use App\User;
 
@@ -22,7 +23,10 @@ class DashboardController
         return SheduleEmail::with('email')->with('mode')->get();
     }
 
-
+    public function listMode()
+    {
+        return response()->json(ModePostEmail::all());
+    }
     /**
      * Get table column
      * @return \Illuminate\Http\JsonResponse
@@ -50,24 +54,26 @@ class DashboardController
         $forms = [
            'date' =>  [
                 'label' => trans('postman::dashboard.date'),
-                'type'  => '',
                 'rule' => [
                     'required'=> true, 'message'=> 'Please input Activity name', 'trigger'=> 'blur',
                 ]
             ],
-            [
+            'theme' => [
                 'label' => trans('postman::dashboard.email.theme'),
             ],
-            [
+            'text' => [
                 'label' => trans('postman::dashboard.email.text'),
             ],
-            [
-                'label' => trans('postman::dashboard.status_action'),
+            'type' => [
+                'label' => trans('postman::dashboard.mode.name'),
+                'placeholder' => trans('postman::dashboard.mode.name'),
             ],
-            [
-                'label' => trans('postman::dashboard.mode.updated_at'),
-            ],
+            'button' => [
+                'success' => trans('postman::dashboard.form.button.success'),
+                'cancel' => trans('postman::dashboard.form.button.cancel'),
+            ]
         ];
+        return response()->json($forms);
     }
     /**
      * @param $id
