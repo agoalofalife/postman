@@ -36,7 +36,7 @@
                     <el-date-picker type="datetime" v-model="ruleForm.date"></el-date-picker>
                 </el-form-item>
                 <el-form-item label="Тема" prop="theme">
-                <el-input placeholder="Please input" v-model="theme"></el-input>
+                <el-input placeholder="Please input" v-model="ruleForm.theme"></el-input>
                 </el-form-item>
 
                 <el-form-item label="Текст" prop="text">
@@ -44,42 +44,20 @@
                 </el-form-item>
 
 
-                <el-form-item label="Activity zone" prop="region">
-                    <el-select v-model="ruleForm.region" placeholder="Activity zone">
-                        <el-option label="Zone one" value="shanghai"></el-option>
-                        <el-option label="Zone two" value="beijing"></el-option>
+                <el-form-item label="Тип отправки" prop="type">
+                    <el-select v-model="ruleForm.region" placeholder="Выбрать тип">
+                        <el-option label="Один на всех" value="shanghai"></el-option>
+                        <el-option label="Каждому" value="beijing"></el-option>
                     </el-select>
                 </el-form-item>
 
-
-
-                <el-form-item label="Instant delivery" prop="delivery">
-                    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
-                </el-form-item>
-                <el-form-item label="Activity type" prop="type">
-                    <el-checkbox-group v-model="ruleForm.type">
-                        <el-checkbox label="Online activities" name="type"></el-checkbox>
-                        <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-                        <el-checkbox label="Offline activities" name="type"></el-checkbox>
-                        <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-                    </el-checkbox-group>
-                </el-form-item>
-                <el-form-item label="Resources" prop="resource">
-                    <el-radio-group v-model="ruleForm.resource">
-                        <el-radio label="Sponsorship"></el-radio>
-                        <el-radio label="Venue"></el-radio>
-                    </el-radio-group>
-                </el-form-item>
-
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
-                    <el-button @click="resetForm('ruleForm')">Reset</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')">Добавить</el-button>
+                    <el-button @click="canselForm">Отмена</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
     </el-row>
-
-
 
     </div>
 </template>
@@ -98,6 +76,9 @@
         methods: {
             chooseRow() {
                 this.flagChooseRow = !this.flagChooseRow
+            },
+            canselForm() {
+
             }
         },
         data() {
