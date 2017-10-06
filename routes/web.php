@@ -8,6 +8,8 @@ Route::prefix('api')->group(function () {
     Route::get('dashboard.table.formColumn', 'DashboardController@formColumn');
     Route::get('dashboard.table.tasks', 'DashboardController@index');
     Route::get('dashboard.table.listMode', 'DashboardController@listMode');
+
+    Route::post('dashboard.table.tasks.create', 'DashboardController@createTask');
     Route::delete('dashboard.table.tasks.remove/{id}', 'DashboardController@remove');
 });
 

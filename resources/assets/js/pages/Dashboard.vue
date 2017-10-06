@@ -25,7 +25,7 @@
                     label="Operations"
                     width="120">
                 <template scope="scope">
-                    <el-button @click="chooseRowEdit" type="text" size="small">{{buttonEdit}}</el-button>
+                    <el-button @click="chooseRowEdit(scope.row)" type="text" size="small">{{buttonEdit}}</el-button>
                     <el-button @click="chooseRowRemove(scope.$index, scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
                 </template>
             </el-table-column>
@@ -33,20 +33,20 @@
         </el-col>
 
         <el-col  :span="18" :offset="3" v-show="flagChooseRow" class="form-edit">
-            <el-form :model="ruleForm" label-width="120px" class="demo-ruleForm">
-                <el-form-item :label="form.date.label" prop="date">
-                    <el-date-picker type="datetime" v-model="ruleForm.date"></el-date-picker>
+            <el-form :model="form" label-width="120px">
+                <el-form-item :label="formText.date.label" prop="date">
+                    <el-date-picker type="datetime" v-model="form.date"></el-date-picker>
                 </el-form-item>
-                <el-form-item :label="form.theme.label" prop="theme">
-                <el-input placeholder="" v-model="ruleForm.theme"></el-input>
-                </el-form-item>
-
-                <el-form-item :label="form.text.label" prop="text">
-                    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                <el-form-item :label="formText.theme.label" prop="theme">
+                <el-input placeholder="" v-model="form.theme"></el-input>
                 </el-form-item>
 
-                <el-form-item :label="form.type.label" prop="mode">
-                    <el-select v-model="ruleForm.mode" :placeholder="form.type.placeholder">
+                <el-form-item :label="formText.text.label" prop="text">
+                    <el-input type="textarea" v-model="form.text"></el-input>
+                </el-form-item>
+
+                <el-form-item :label="formText.type.label" prop="mode">
+                    <el-select v-model="form.mode" :placeholder="formText.type.placeholder">
                         <el-tooltip v-for="mode in listMode" :key="mode.id" :content="mode.description" placement="top">
                             <el-option :label="mode.name" :value="mode.id"></el-option>
                         </el-tooltip>
@@ -55,8 +55,8 @@
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">{{ form.button.success }} </el-button>
-                    <el-button @click="cancelForm">{{ form.button.cancel }} </el-button>
+                    <el-button type="primary" @click="submitForm">{{ formText.button.success }} </el-button>
+                    <el-button @click="cancelForm">{{ formText.button.cancel }} </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -77,13 +77,17 @@
 <script>
     export default {
         methods: {
-            chooseRowEdit() {
+            chooseRowEdit(row) {
                 this.flagChooseRow = !this.flagChooseRow;
+                this.form.date = row.date;
+                this.form.theme = row.email.theme;
+                this.form.text = row.email.text;
+                this.form.mode = row.mode.id;
             },
             chooseRowRemove(index, row) {
-                this.$confirm(this.form.popup.question, this.form.popup.title, {
-                    confirmButtonText: this.form.popup.confirmButtonText,
-                    cancelButtonText: this.form.popup.cancelButtonText,
+                this.$confirm(this.formText.popup.question, this.formText.popup.title, {
+                    confirmButtonText: this.formText.popup.confirmButtonText,
+                    cancelButtonText: this.formText.popup.cancelButtonText,
                     type: 'warning'
                 }).then(() => {
                     console.log( index, row );
@@ -92,7 +96,7 @@
                             this.tableData.splice(index, 1);
                             this.$message({
                                 type: 'success',
-                                message: this.form.popup['success.message']
+                                message: this.formText.popup['success.message']
                             });
                         })
                         .catch((response) => {
@@ -102,9 +106,18 @@
                 }).catch(() => {
                     this.$message({
                         type: 'info',
-                        message: this.form.popup['info.message']
+                        message: this.formText.popup['info.message']
                     });
                 });
+            },
+            submitForm() {
+                var data = {
+                  date : this.form.date,
+                  theme : this.form.theme,
+                  text : this.form.text,
+                  mode : this.form.mode,
+                };
+                console.log( 'post data form', data );
             },
             cancelForm() {
                 this.flagChooseRow = false;
@@ -120,7 +133,7 @@
                 columns:[],
                 tableData:[],
                 listMode:[],
-                form:{
+                formText:{
                     date : {
                         label : 'Date of sending email'
                     },
@@ -139,7 +152,7 @@
                         cancel:'Cancel',
                     }
                 },
-                ruleForm: {
+                form: {
                   date: '',
                   theme: '',
                   text: '',
@@ -153,7 +166,7 @@
                     .then(response => {
                         this.buttonEdit = response.data.button.edit;
                         this.buttonRemove = response.data.button.remove;
-                        this.columns = response.data.columns
+                        this.columns = response.data.columns;
                         
 
                  this.$http.get('/postman/api/dashboard.table.tasks')
@@ -169,7 +182,7 @@
         created: function () {
             this.$http.get('/postman/api/dashboard.table.formColumn')
                 .then(response => {
-                    this.form = response.data
+                    this.formText = response.data
                 });
 
             this.$http.get('/postman/api/dashboard.table.listMode')

@@ -5,6 +5,7 @@ namespace agoalofalife\postman\Http\Controllers;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
 use App\User;
+use Illuminate\Http\Request;
 
 class DashboardController
 {
@@ -93,6 +94,15 @@ class DashboardController
         return response()->json($forms);
     }
 
+    public function createTask(Request $request)
+    {
+        dd($request->all());
+    }
+
+    public function updateTask(Request $request)
+    {
+        dd($request->all());
+    }
     /**
      * @param $id
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
