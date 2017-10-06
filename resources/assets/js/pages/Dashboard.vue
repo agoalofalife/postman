@@ -55,7 +55,7 @@
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm">{{ formText.button.success }} </el-button>
+                    <el-button type="primary" @click="editTask">{{ formText.button.success }} </el-button>
                     <el-button @click="cancelForm">{{ formText.button.cancel }} </el-button>
                 </el-form-item>
             </el-form>
@@ -75,14 +75,26 @@
 </style>
 
 <script>
+    let modeWindow = {
+        'edit' : {
+            'url' : '/postman/api/dashboard.table.tasks.update',
+            'method' : 'put'
+        },
+        'create' : {
+            'url' : '/postman/api/dashboard.table.tasks.create',
+            'method': 'post'
+        }
+    };
     export default {
         methods: {
             chooseRowEdit(row) {
                 this.flagChooseRow = !this.flagChooseRow;
-                this.form.date = row.date;
+                this.form.date  = row.date;
                 this.form.theme = row.email.theme;
-                this.form.text = row.email.text;
-                this.form.mode = row.mode.id;
+                this.form.text  = row.email.text;
+                this.form.mode  = row.mode.id;
+                //set in mode "edit"
+                this.modeWindow = modeWindow['edit']
             },
             chooseRowRemove(index, row) {
                 this.$confirm(this.formText.popup.question, this.formText.popup.title, {
@@ -110,13 +122,21 @@
                     });
                 });
             },
-            submitForm() {
+            editTask() {
                 var data = {
                   date : this.form.date,
                   theme : this.form.theme,
                   text : this.form.text,
                   mode : this.form.mode,
                 };
+
+                this.$http[this.modeWindow.method](this.modeWindow.url, data)
+                    .then(response => {
+                        console.log( response );
+                    })
+                    .catch(() => {
+                        this.flagFetchError = true
+                    })
                 console.log( 'post data form', data );
             },
             cancelForm() {
@@ -133,6 +153,7 @@
                 columns:[],
                 tableData:[],
                 listMode:[],
+                modeWindow:'',
                 formText:{
                     date : {
                         label : 'Date of sending email'

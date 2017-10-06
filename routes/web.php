@@ -10,6 +10,7 @@ Route::prefix('api')->group(function () {
     Route::get('dashboard.table.listMode', 'DashboardController@listMode');
 
     Route::post('dashboard.table.tasks.create', 'DashboardController@createTask');
+    Route::put('dashboard.table.tasks.update', 'DashboardController@updateTask');
     Route::delete('dashboard.table.tasks.remove/{id}', 'DashboardController@remove');
 });
 
