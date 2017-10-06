@@ -2,9 +2,9 @@
 
 namespace agoalofalife\postman\Http\Controllers;
 
+use agoalofalife\postman\Models\Email;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
-use App\User;
 use Illuminate\Http\Request;
 
 class DashboardController
@@ -99,9 +99,23 @@ class DashboardController
         dd($request->all());
     }
 
+    /**
+     * Update task
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateTask(Request $request)
     {
-        dd($request->all());
+        $task = SheduleEmail::find($request->id);
+        $task->update([
+            'mode_id' => $request->mode,
+            'date' => $request->date,
+        ]);
+        $task->email->update([
+            'theme' => $request->theme,
+            'text' => $request->text,
+        ]);
+        return response()->json(['status' => true]);
     }
     /**
      * @param $id

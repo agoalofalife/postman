@@ -89,6 +89,7 @@
         methods: {
             chooseRowEdit(row) {
                 this.flagChooseRow = !this.flagChooseRow;
+                this.form.id = row.id;
                 this.form.date  = row.date;
                 this.form.theme = row.email.theme;
                 this.form.text  = row.email.text;
@@ -124,6 +125,7 @@
             },
             editTask() {
                 var data = {
+                  id : this.form.id,
                   date : this.form.date,
                   theme : this.form.theme,
                   text : this.form.text,
@@ -132,11 +134,10 @@
 
                 this.$http[this.modeWindow.method](this.modeWindow.url, data)
                     .then(response => {
-                        console.log( response );
-                    })
-                    .catch(() => {
-                        this.flagFetchError = true
-                    })
+                        if (response.data.status) {
+                            this.flagChooseRow = false;
+                        }
+                    });
                 console.log( 'post data form', data );
             },
             cancelForm() {
@@ -174,6 +175,7 @@
                     }
                 },
                 form: {
+                  id:'',
                   date: '',
                   theme: '',
                   text: '',
