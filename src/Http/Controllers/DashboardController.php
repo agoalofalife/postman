@@ -5,6 +5,7 @@ namespace agoalofalife\postman\Http\Controllers;
 use agoalofalife\postman\Models\Email;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController
@@ -105,7 +106,9 @@ class DashboardController
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateTask(Request $request)
-    {
+    { dd($request->date);
+        dd(Carbon::parse($request->date)->toDateTimeString());
+
         $task = SheduleEmail::find($request->id);
         $task->update([
             'mode_id' => $request->mode,

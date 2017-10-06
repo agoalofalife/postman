@@ -25,7 +25,7 @@
                     label="Operations"
                     width="120">
                 <template scope="scope">
-                    <el-button @click="chooseRowEdit(scope.row)" type="text" size="small">{{buttonEdit}}</el-button>
+                    <el-button @click="chooseRowEdit(scope.$index,scope.row)" type="text" size="small">{{buttonEdit}}</el-button>
                     <el-button @click="chooseRowRemove(scope.$index, scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
                 </template>
             </el-table-column>
@@ -87,9 +87,12 @@
     };
     export default {
         methods: {
-            chooseRowEdit(row) {
+            chooseRowEdit(index, row) {
                 this.flagChooseRow = !this.flagChooseRow;
+                this.сurrentIndex = index;
                 this.form.id = row.id;
+//                console.log(  Date.parse(row.date).setHours(4));
+//                console.log( Date.parse(row.date).setHours(Date.parse(row.date).getHours() + 4) );
                 this.form.date  = row.date;
                 this.form.theme = row.email.theme;
                 this.form.text  = row.email.text;
@@ -135,10 +138,14 @@
                 this.$http[this.modeWindow.method](this.modeWindow.url, data)
                     .then(response => {
                         if (response.data.status) {
+                            this.tableData[this.сurrentIndex]['email']['text'] = this.form.text;
+                            this.tableData[this.сurrentIndex]['date'] = this.form.date;
+                            this.tableData[this.сurrentIndex]['email']['theme'] = this.form.theme;
+                            this.tableData[this.сurrentIndex]['mode_id'] = this.form.mode;
+
                             this.flagChooseRow = false;
                         }
                     });
-                console.log( 'post data form', data );
             },
             cancelForm() {
                 this.flagChooseRow = false;
@@ -155,6 +162,7 @@
                 tableData:[],
                 listMode:[],
                 modeWindow:'',
+                сurrentIndex:'',
                 formText:{
                     date : {
                         label : 'Date of sending email'
@@ -180,7 +188,6 @@
                   theme: '',
                   text: '',
                   mode: '',
-                  resource: '',
                 },
             }
         },
