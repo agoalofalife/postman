@@ -1,13 +1,18 @@
 <template>
     <div>
+
     <el-row class="table-postman">
+        <el-col :span="16" :offset="3">
+            <i class="el-icon-plus" @click="createTask"> </i>
+        </el-col>
+        <br>
+        <br>
         <el-col :span="16" :offset="11" v-show="!flagFetchData && !flagFetchError">
             <i class="el-icon-loading"></i>
         </el-col>
         <el-col :span="16" :offset="11" v-show="flagFetchError">
             <h4>Error</h4>
         </el-col>
-
         <el-col :span="18" :offset="3" v-show="flagFetchData">
             <el-table
             :data="tableData"
@@ -91,6 +96,13 @@
             'method': 'post'
         }
     };
+    let stubForm = {
+        id:'',
+        date: '',
+        theme: '',
+        text: '',
+        mode: '',
+    };
     export default {
         methods: {
             chooseRowEdit(index, row) {
@@ -150,6 +162,12 @@
             },
             cancelForm() {
                 this.dialogFormVisible = false;
+            },
+            createTask(){
+                this.form = Object.assign(this.form, stubForm);
+                this.dialogFormVisible = true;
+                this.modeWindow = modeWindow['create'];
+
             }
         },
         data() {
