@@ -106,9 +106,9 @@ class DashboardController
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateTask(Request $request)
-    { dd($request->date);
-        dd(Carbon::parse($request->date)->toDateTimeString());
-
+    {
+        // I add 3 hours because of the bug in element-ui from client
+        $request->date = Carbon::parse($request->date)->addHour(3)->toDateTimeString();
         $task = SheduleEmail::find($request->id);
         $task->update([
             'mode_id' => $request->mode,

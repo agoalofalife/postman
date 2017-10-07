@@ -35,7 +35,7 @@
         <el-col  :span="18" :offset="3" v-show="flagChooseRow" class="form-edit">
             <el-form :model="form" label-width="120px">
                 <el-form-item :label="formText.date.label" prop="date">
-                    <el-date-picker type="datetime" v-model="form.date"></el-date-picker>
+                    <el-date-picker type="datetime"  v-model="form.date"></el-date-picker>
                 </el-form-item>
                 <el-form-item :label="formText.theme.label" prop="theme">
                 <el-input placeholder="" v-model="form.theme"></el-input>
@@ -91,8 +91,6 @@
                 this.flagChooseRow = !this.flagChooseRow;
                 this.сurrentIndex = index;
                 this.form.id = row.id;
-//                console.log(  Date.parse(row.date).setHours(4));
-//                console.log( Date.parse(row.date).setHours(Date.parse(row.date).getHours() + 4) );
                 this.form.date  = row.date;
                 this.form.theme = row.email.theme;
                 this.form.text  = row.email.text;
@@ -127,15 +125,16 @@
                 });
             },
             editTask() {
-                var data = {
-                  id : this.form.id,
-                  date : this.form.date,
-                  theme : this.form.theme,
-                  text : this.form.text,
-                  mode : this.form.mode,
-                };
 
-                this.$http[this.modeWindow.method](this.modeWindow.url, data)
+                console.log(  new  Date(this.form.date), this.$refs);
+
+                this.$http[this.modeWindow.method](this.modeWindow.url, {
+                    id : this.form.id,
+                    date : this.form.date,
+                    theme : this.form.theme,
+                    text : this.form.text,
+                    mode : this.form.mode,
+                })
                     .then(response => {
                         if (response.data.status) {
                             this.tableData[this.сurrentIndex]['email']['text'] = this.form.text;
@@ -219,7 +218,15 @@
                 .then(response => {
                     this.listMode = response.data
                 })
+        },
+        directives: {
+            'date-format': function (el, binding) {
+                            el.querySelector('input').value =  binding.value;
+                            console.dir( el.querySelector('input').value , binding);
+//                            this.form.date = el.querySelector('input').value
+                        }
         }
     }
+
 
 </script>
