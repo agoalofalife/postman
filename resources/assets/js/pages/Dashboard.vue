@@ -30,7 +30,6 @@
                     label="Operations"
                     width="120">
                 <template scope="scope">
-                    <!--<el-button @click="chooseRowEdit(scope.$index,scope.row)" type="text" size="small">{{buttonEdit}}</el-button>-->
                     <el-button @click="chooseRowEdit(scope.$index,scope.row)" type="text" size="small">{{buttonEdit}}</el-button>
                     <el-button @click="chooseRowRemove(scope.$index, scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
                 </template>
@@ -68,7 +67,6 @@
             </el-form>
         </el-col>
         </el-dialog>
-
     </el-row>
 
     </div>
@@ -242,6 +240,4 @@
                 })
         }
     }
-
-
 </script>

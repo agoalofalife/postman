@@ -10,15 +10,16 @@ use Illuminate\Http\Request;
 
 class DashboardController
 {
-    protected $nameColumns = [
-        'id' => 40,
-        'date' => 180,
-        'email.theme' => 180,
-        'email.text' => 400,
-        'mode.name' => 130,
-        'status_action' => 210,
-        'updated_at' => 120,
-    ];
+    /**
+     * Size column ui
+     * @var array
+     */
+    protected $nameColumns;
+
+    public function __construct()
+    {   // set sizes column in table
+        $this->nameColumns = config('postman.ui.table');
+    }
 
     public function index()
     {
@@ -99,7 +100,7 @@ class DashboardController
     {
         $request->date = Carbon::parse($request->date)->toDateTimeString();
 
-        $s = Email::create([
+         Email::create([
             'theme' => $request->theme,
             'text' => $request->text,
         ])->tasks()->create([
@@ -117,7 +118,6 @@ class DashboardController
      */
     public function updateTask(Request $request)
     {
-        // I add 3 hours because of the bug in element-ui from client
         $request->date = Carbon::parse($request->date)->toDateTimeString();
         $task = SheduleEmail::find($request->id);
         $task->update([
