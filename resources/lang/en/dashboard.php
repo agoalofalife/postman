@@ -9,6 +9,9 @@ return [
     'mode.name' => 'Type of sending',
     'mode.placeholder' => 'Choose',
 
+    'users.name' => 'Users',
+    'users.placeholder' => 'Choose',
+
     'status_action' => 'Send status email',
     'updated_at' => 'Update At',
     'button.edit' => 'Edit',
@@ -24,6 +27,7 @@ return [
 
     'form.button.success' => 'Save',
     'form.button.cancel' => 'Cancel',
+
 
     'popup.question' => 'Are you sure you want to remove?',
     'popup.title' => 'Window',

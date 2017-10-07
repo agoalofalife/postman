@@ -5,6 +5,7 @@ namespace agoalofalife\postman\Http\Controllers;
 use agoalofalife\postman\Models\Email;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,11 @@ class DashboardController
     public function listMode()
     {
         return response()->json(ModePostEmail::all());
+    }
+
+    public function users()
+    {
+        return User::all();
     }
 
     /**
@@ -78,7 +84,11 @@ class DashboardController
             ],
             'type' => [
                 'label' => trans('postman::dashboard.mode.name'),
-                'placeholder' => trans('postman::dashboard.mode.name'),
+                'placeholder' => trans('postman::dashboard.mode.placeholder'),
+            ],
+            'users' => [
+                'label' => trans('postman::dashboard.users.name'),
+                'placeholder' => trans('postman::dashboard.users.placeholder'),
             ],
             'button' => [
                 'success' => trans('postman::dashboard.form.button.success'),

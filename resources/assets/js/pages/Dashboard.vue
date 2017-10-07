@@ -51,12 +51,27 @@
                     <el-input type="textarea" v-model="form.text"></el-input>
                 </el-form-item>
 
+                <el-form-item :label="formText.users.label" prop="text">
+                <el-select
+                        v-model="form.users"
+                        multiple
+                        filterable
+                        allow-create
+                        :placeholder="formText.users.placeholder">
+                    <el-option
+                            v-for="user in users"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
+                    </el-option>
+                </el-select>
+                </el-form-item>
+
                 <el-form-item :label="formText.type.label" prop="mode">
                     <el-select v-model="form.mode" :placeholder="formText.type.placeholder">
                         <el-tooltip v-for="mode in listMode" :key="mode.id" :content="mode.description" placement="top">
                             <el-option :label="mode.name" :value="mode.id"></el-option>
                         </el-tooltip>
-
                     </el-select>
                 </el-form-item>
 
@@ -177,6 +192,7 @@
                 listMode:[],
                 modeWindow:'',
                 сurrentIndex:'',
+                users:[],
                 dialogFormVisible:false,
                 formText:{
                     date : {
@@ -192,6 +208,10 @@
                         placeholder:'Choose',
                         label :'Type of sending'
                     },
+                    users : {
+                        placeholder:'Choose',
+                        label :'Users'
+                    },
                     button : {
                         success : 'Success',
                         cancel:'Cancel',
@@ -203,11 +223,12 @@
                   theme: '',
                   text: '',
                   mode: '',
+                  users:[],
                 },
                 normalizeDate : function (date) {
                     return moment(this.form.date).format('YYYY-MM-DD HH:mm:ss')
                 },
-                 syncData: function () {
+                syncData: function () {
                     return this.$http.get('/postman/api/dashboard.table.tasks')
                         .then(response => {
                             this.tableData = response.data;
@@ -226,6 +247,10 @@
                         this.buttonRemove = response.data.button.remove;
                         this.columns = response.data.columns;
                         this.syncData();
+                });
+             this.$http.get('/postman/api/dashboard.table.users')
+                .then(response => {
+                    this.users =  response.data;
                 });
         },
         created: function () {

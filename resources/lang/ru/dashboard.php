@@ -9,6 +9,9 @@ return [
     'mode.name' => 'Тип отправки',
     'mode.placeholder' => 'Выбрать тип',
 
+    'users.name' => 'Пользователи',
+    'users.placeholder' => 'Выбрать',
+
     'status_action' => 'Статус',
     'updated_at' => 'Активность',
     'button.edit' => 'Редактировать',
