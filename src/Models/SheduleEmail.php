@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SheduleEmail extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['date' , 'email_id', 'mode_id'];
+    protected $fillable = ['date' , 'email_id', 'mode_id', 'status_action'];
 
     /**
      * The attributes that should be cast to native types.

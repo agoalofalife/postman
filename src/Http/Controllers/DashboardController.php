@@ -97,7 +97,17 @@ class DashboardController
 
     public function createTask(Request $request)
     {
-        dd($request->all());
+        $request->date = Carbon::parse($request->date)->toDateTimeString();
+
+        $s = Email::create([
+            'theme' => $request->theme,
+            'text' => $request->text,
+        ])->tasks()->create([
+            'date' => $request->date,
+            'mode_id' => $request->mode,
+            'status_action' => 0
+        ]);
+        return response()->json(['status' => true]);
     }
 
     /**
@@ -108,7 +118,7 @@ class DashboardController
     public function updateTask(Request $request)
     {
         // I add 3 hours because of the bug in element-ui from client
-        $request->date = Carbon::parse($request->date)->addHour(3)->toDateTimeString();
+        $request->date = Carbon::parse($request->date)->toDateTimeString();
         $task = SheduleEmail::find($request->id);
         $task->update([
             'mode_id' => $request->mode,

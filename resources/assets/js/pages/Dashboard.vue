@@ -2,7 +2,7 @@
     <div>
 
     <el-row class="table-postman">
-        <el-col :span="16" :offset="3">
+        <el-col :span="16" :offset="3" v-show="flagFetchData">
             <i class="el-icon-plus" @click="createTask"> </i>
         </el-col>
         <br>
@@ -145,7 +145,7 @@
             editTask() {
                 this.$http[this.modeWindow.method](this.modeWindow.url, {
                     id : this.form.id,
-                    date : this.form.date,
+                    date : this.normalizeDate(this.form.date),
                     theme : this.form.theme,
                     text : this.form.text,
                     mode : this.form.mode,
