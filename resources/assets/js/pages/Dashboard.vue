@@ -241,14 +241,7 @@
                 .then(response => {
                     this.listMode = response.data
                 })
-        },
-        directives: {
-            'date-format': function (el, binding) {
-                            el.querySelector('input').value =  binding.value;
-                            console.dir( el.querySelector('input').value , binding);
-//                            this.form.date = el.querySelector('input').value
-                        }
-        },
+        }
     }
 
 
