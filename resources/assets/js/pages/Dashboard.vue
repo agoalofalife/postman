@@ -25,6 +25,7 @@
                     label="Operations"
                     width="120">
                 <template scope="scope">
+                    <!--<el-button @click="chooseRowEdit(scope.$index,scope.row)" type="text" size="small">{{buttonEdit}}</el-button>-->
                     <el-button @click="chooseRowEdit(scope.$index,scope.row)" type="text" size="small">{{buttonEdit}}</el-button>
                     <el-button @click="chooseRowRemove(scope.$index, scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
                 </template>
@@ -32,7 +33,8 @@
             </el-table>
         </el-col>
 
-        <el-col  :span="18" :offset="3" v-show="flagChooseRow" class="form-edit">
+        <el-dialog :visible.sync="dialogFormVisible">
+        <el-col  :span="18" :offset="3"  class="form-edit">
             <el-form :model="form" label-width="120px">
                 <el-form-item :label="formText.date.label" prop="date">
                     <el-date-picker type="datetime"  v-model="form.date"></el-date-picker>
@@ -60,6 +62,8 @@
                 </el-form-item>
             </el-form>
         </el-col>
+        </el-dialog>
+
     </el-row>
 
     </div>
@@ -75,6 +79,8 @@
 </style>
 
 <script>
+    import moment from 'moment';
+
     let modeWindow = {
         'edit' : {
             'url' : '/postman/api/dashboard.table.tasks.update',
@@ -88,7 +94,7 @@
     export default {
         methods: {
             chooseRowEdit(index, row) {
-                this.flagChooseRow = !this.flagChooseRow;
+                this.dialogFormVisible = true;
                 this.сurrentIndex = index;
                 this.form.id = row.id;
                 this.form.date  = row.date;
@@ -125,9 +131,6 @@
                 });
             },
             editTask() {
-
-                console.log(  new  Date(this.form.date), this.$refs);
-
                 this.$http[this.modeWindow.method](this.modeWindow.url, {
                     id : this.form.id,
                     date : this.form.date,
@@ -138,23 +141,21 @@
                     .then(response => {
                         if (response.data.status) {
                             this.tableData[this.сurrentIndex]['email']['text'] = this.form.text;
-                            this.tableData[this.сurrentIndex]['date'] = this.form.date;
+                            this.tableData[this.сurrentIndex]['date'] = this.normalizeDate(this.form.date);
                             this.tableData[this.сurrentIndex]['email']['theme'] = this.form.theme;
                             this.tableData[this.сurrentIndex]['mode_id'] = this.form.mode;
-
-                            this.flagChooseRow = false;
+                            this.dialogFormVisible = false;
                         }
                     });
             },
             cancelForm() {
-                this.flagChooseRow = false;
+                this.dialogFormVisible = false;
             }
         },
         data() {
             return {
                 flagFetchData:false,
                 flagFetchError:false,
-                flagChooseRow:false,
                 buttonEdit:'',
                 buttonRemove:'',
                 columns:[],
@@ -162,6 +163,7 @@
                 listMode:[],
                 modeWindow:'',
                 сurrentIndex:'',
+                dialogFormVisible:false,
                 formText:{
                     date : {
                         label : 'Date of sending email'
@@ -188,6 +190,9 @@
                   text: '',
                   mode: '',
                 },
+                normalizeDate : function (date) {
+                    return moment(this.form.date).format('YYYY-MM-DD HH:mm:ss')
+                }
             }
         },
         mounted: function () {
@@ -225,7 +230,7 @@
                             console.dir( el.querySelector('input').value , binding);
 //                            this.form.date = el.querySelector('input').value
                         }
-        }
+        },
     }
 
 
