@@ -152,11 +152,9 @@
                 })
                     .then(response => {
                         if (response.data.status) {
-                            this.tableData[this.сurrentIndex]['email']['text'] = this.form.text;
-                            this.tableData[this.сurrentIndex]['date'] = this.normalizeDate(this.form.date);
-                            this.tableData[this.сurrentIndex]['email']['theme'] = this.form.theme;
-                            this.tableData[this.сurrentIndex]['mode_id'] = this.form.mode;
-                            this.dialogFormVisible = false;
+                            this.syncData().then(() => {
+                                this.dialogFormVisible = false;
+                            });
                         }
                     });
             },
@@ -210,6 +208,16 @@
                 },
                 normalizeDate : function (date) {
                     return moment(this.form.date).format('YYYY-MM-DD HH:mm:ss')
+                },
+                 syncData: function () {
+                    return this.$http.get('/postman/api/dashboard.table.tasks')
+                        .then(response => {
+                            this.tableData = response.data;
+                            this.flagFetchData = true;
+                        })
+                        .catch(() => {
+                            this.flagFetchError = true
+                        })
                 }
             }
         },
@@ -219,16 +227,7 @@
                         this.buttonEdit = response.data.button.edit;
                         this.buttonRemove = response.data.button.remove;
                         this.columns = response.data.columns;
-                        
-
-                 this.$http.get('/postman/api/dashboard.table.tasks')
-                    .then(response => {
-                        this.tableData = response.data;
-                        this.flagFetchData = true;
-                    })
-                     .catch(() => {
-                            this.flagFetchError = true
-                     })
+                        this.syncData();
                 });
         },
         created: function () {
