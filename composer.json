@@ -10,7 +10,14 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "php": ">=5.6.4"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.6",
+        "mockery/mockery": "^0.9.9",
+        "phpunit/phpunit": "5.7.*"
+    },
     "autoload": {
         "psr-4": {
             "agoalofalife\\postman\\":"src/"
@@ -18,7 +25,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "agoalofalife\\Tests\\": "tests/Unit/"
         }
+    },
+    "scripts": {
+    "test": "vendor/bin/phpunit --stop-on-failure --no-coverage"
     }
 }
