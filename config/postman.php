@@ -3,7 +3,7 @@ return [
     'switcher' => true,
     'ui' => [
         'table' => [
-            'id' => 40,
+            'id' => 60,
             'date' => 180,
             'email.theme' => 180,
             'email.text' => 400,
