@@ -7,9 +7,10 @@ return [
             'date' => 180,
             'email.theme' => 180,
             'email.text' => 400,
-            'mode.name' => 130,
-            'status_action' => 210,
-            'updated_at' => 120,
+            'mode.name' => 140,
+            'status_action' => 130,
+            'updated_at' => 140,
+            'operations' => 160,
         ]
     ]
 ];

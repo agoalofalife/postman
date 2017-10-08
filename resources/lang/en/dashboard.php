@@ -8,7 +8,7 @@ return [
 
     'mode.name' => 'Type of sending',
     'mode.placeholder' => 'Choose',
-
+    'operations' => 'operations',
     'users.name' => 'Users',
     'users.placeholder' => 'Choose',
 

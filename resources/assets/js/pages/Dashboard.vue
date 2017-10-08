@@ -27,9 +27,10 @@
                          :width="column.size">
             </el-table-column>
             <el-table-column
-                    fixed="right"
-                    label="Operations"
-                    width="120">
+                     fixed="right"
+                     :label="columnAction.label"
+                     :width="columnAction.size"
+                    >
                 <template scope="scope">
                     <el-button @click="chooseRowEdit(scope.$index,scope.row)" type="text" size="small">{{buttonEdit}}</el-button>
                     <el-button @click="chooseRowRemove(scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
@@ -197,6 +198,10 @@
                 listMode:[],
                 modeWindow:'',
                 сurrentIndex:'',
+                columnAction:{
+                    label:'Operations',
+                    size: 120,
+                },
                 errorMessage:'',
                 users:[],
                 dialogFormVisible:false,
@@ -253,6 +258,7 @@
                         this.buttonEdit = response.data.button.edit;
                         this.buttonRemove = response.data.button.remove;
                         this.columns = response.data.columns;
+                        this.columnAction = this.columns.pop();
                         this.syncData();
                 });
              this.$http.get('/postman/api/dashboard.table.users')
@@ -270,6 +276,7 @@
                 .then(response => {
                     this.listMode = response.data
                 })
-        }
+        },
+
     }
 </script>

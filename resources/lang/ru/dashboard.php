@@ -8,7 +8,7 @@ return [
 
     'mode.name' => 'Тип отправки',
     'mode.placeholder' => 'Выбрать тип',
-
+    'operations' => 'Операции',
     'users.name' => 'Пользователи',
     'users.placeholder' => 'Выбрать',
 
@@ -16,7 +16,6 @@ return [
     'updated_at' => 'Активность',
     'button.edit' => 'Редактировать',
     'button.remove' => 'Удалить',
-    'operations' => 'Операции',
 
         // user
     'email' => 'Email пользователя',
