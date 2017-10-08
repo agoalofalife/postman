@@ -129,7 +129,6 @@ class DashboardController
      */
     public function updateTask(Request $request)
     {
-
         $request->date = Carbon::parse($request->date)->toDateTimeString();
         $task = SheduleEmail::find($request->id);
         $task->update([
@@ -140,9 +139,13 @@ class DashboardController
             'theme' => $request->theme,
             'text' => $request->text,
         ]);
-        collect($request->users)->each(function($user_id, $task){
-            $mask = ['email_id' => $task->email->id, 'user_id' => $user_id];
-            EmailUser::updateOrCreate($mask);
+
+        $goalList = EmailUser::where('email_id', $task->email->id);
+        $removal  = $goalList->get()->pluck('user_id')->diff($request->users)->values();
+        $goalList->whereIn('user_id', $removal)->delete();
+
+        collect($request->users)->each(function($user_id) use($task, &$usersToEmail) {
+            EmailUser::firstOrCreate(['email_id' => $task->email->id, 'user_id' => $user_id]);
         });
         return response()->json(['status' => true]);
     }
