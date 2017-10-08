@@ -120,10 +120,18 @@ class DashboardController
     {
         $request->datePostman($request);
 
-         Email::create([
+        $email = Email::create([
             'theme' => $request->theme,
             'text' => $request->text,
-        ])->tasks()->create([
+        ]);
+        array_map(function($user_id) use($email) {
+            EmailUser::create([
+                'user_id' => $user_id,
+                'email_id' => $email->id,
+            ]);
+        }, $request->users);
+
+        $email->tasks()->create([
             'date' => $request->date,
             'mode_id' => $request->mode,
             'status_action' => 0
