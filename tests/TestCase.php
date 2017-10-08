@@ -4,6 +4,8 @@ namespace agoalofalife\Tests;
 use Mockery;
 use Faker\Factory;
 use Faker\Generator;
+use Illuminate\Database\Eloquent\Factory as EloquentFactory;
+use Illuminate\Container\Container;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
@@ -37,4 +39,5 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             $this->assertArrayHasKey($key, $source);
         }, $keys);
     }
+
 }
