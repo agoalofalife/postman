@@ -7,7 +7,6 @@ use agoalofalife\postman\Models\EmailUser;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
 use agoalofalife\postman\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController
@@ -23,6 +22,9 @@ class DashboardController
         $this->nameColumns = config('postman.ui.table');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
     public function index()
     {
         return SheduleEmail::with('email.users')->with('mode')->get();
@@ -37,6 +39,9 @@ class DashboardController
         return response()->json(ModePostEmail::all());
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function users()
     {
         return User::all();
@@ -107,9 +112,13 @@ class DashboardController
         return response()->json($forms);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createTask(Request $request)
     {
-        $request->date = Carbon::parse($request->date)->toDateTimeString();
+        $request->datePostman($request);
 
          Email::create([
             'theme' => $request->theme,
@@ -129,7 +138,7 @@ class DashboardController
      */
     public function updateTask(Request $request)
     {
-        $request->date = Carbon::parse($request->date)->toDateTimeString();
+        $request->datePostman($request);
         $task = SheduleEmail::find($request->id);
         $task->update([
             'mode_id' => $request->mode,

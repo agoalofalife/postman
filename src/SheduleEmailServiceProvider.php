@@ -1,9 +1,10 @@
 <?php
 namespace agoalofalife\postman;
 
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use Themsaid\Transformers\TransformersServiceProvider;
 
 /**
  * Class SheduleEmailServiceProvider
@@ -44,16 +45,9 @@ class SheduleEmailServiceProvider extends ServiceProvider
         ]);
         $this->loadViews();
 
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->registerProvider();
+        Request::macro('datePostman', function (Request $request) {
+            $request-> date =  Carbon::parse($request->date)->toDateTimeString();
+        });
     }
 
     /**
@@ -72,17 +66,8 @@ class SheduleEmailServiceProvider extends ServiceProvider
         });
     }
 
-
     protected function loadViews()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'postman');
-    }
-
-    /**
-     * Register providers
-     */
-    protected function registerProvider()
-    {
-
     }
 }
