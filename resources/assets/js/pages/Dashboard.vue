@@ -166,6 +166,7 @@
                     theme : this.form.theme,
                     text : this.form.text,
                     mode : this.form.mode,
+                    users:this.form.users,
                 })
                     .then(response => {
                         if (response.data.status) {

@@ -3,6 +3,7 @@
 namespace agoalofalife\postman\Http\Controllers;
 
 use agoalofalife\postman\Models\Email;
+use agoalofalife\postman\Models\EmailUser;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
 use agoalofalife\postman\Models\User;
@@ -128,6 +129,7 @@ class DashboardController
      */
     public function updateTask(Request $request)
     {
+
         $request->date = Carbon::parse($request->date)->toDateTimeString();
         $task = SheduleEmail::find($request->id);
         $task->update([
@@ -138,6 +140,10 @@ class DashboardController
             'theme' => $request->theme,
             'text' => $request->text,
         ]);
+        collect($request->users)->each(function($user_id, $task){
+            $mask = ['email_id' => $task->email->id, 'user_id' => $user_id];
+            EmailUser::updateOrCreate($mask);
+        });
         return response()->json(['status' => true]);
     }
     /**
