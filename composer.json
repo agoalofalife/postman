@@ -1,6 +1,6 @@
 {
     "name": "agoalofalife/postman",
-    "description": "",
+    "description": "Schedule a task for sending e-mail",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,7 +11,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.6.4"
+        "php": ">=5.6.4",
+        "illuminate/support": "5.5.*"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.6",
@@ -25,7 +26,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "agoalofalife\\Tests\\": "tests/Unit/"
+            "agoalofalife\\Tests\\": "tests/"
         }
     },
     "scripts": {

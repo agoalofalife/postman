@@ -1,7 +1,7 @@
 <?php
 namespace agoalofalife\Tests\Modes;
 
-use Tests\TestCase;
+use agoalofalife\Tests\TestCase;
 
 class OneToAllTest extends TestCase
 {

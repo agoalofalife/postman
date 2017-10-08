@@ -1,5 +1,4 @@
 <?php
-
 namespace agoalofalife\postman;
 
 use agoalofalife\postman\Models\SheduleEmail;

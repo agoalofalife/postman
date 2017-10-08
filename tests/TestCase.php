@@ -1,6 +1,5 @@
 <?php
-
-namespace Tests;
+namespace agoalofalife\Tests;
 
 use Mockery;
 use Faker\Factory;
