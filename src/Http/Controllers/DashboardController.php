@@ -5,7 +5,7 @@ namespace agoalofalife\postman\Http\Controllers;
 use agoalofalife\postman\Models\Email;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
-use App\User;
+use agoalofalife\postman\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -24,7 +24,7 @@ class DashboardController
 
     public function index()
     {
-        return SheduleEmail::with('email')->with('mode')->get();
+        return SheduleEmail::with('email.users')->with('mode')->get();
     }
 
     /**

@@ -11,7 +11,8 @@
             <i class="el-icon-loading"></i>
         </el-col>
         <el-col :span="16" :offset="11" v-show="flagFetchError">
-            <h4>Error</h4>
+            <h3>Error</h3>
+            <h4>{{ errorMessage }}</h4>
         </el-col>
         <el-col :span="18" :offset="3" v-show="flagFetchData">
             <el-table
@@ -24,14 +25,14 @@
                          :prop="column.prop"
                          :label="column.label"
                          :width="column.size">
-        </el-table-column>
+            </el-table-column>
             <el-table-column
                     fixed="right"
                     label="Operations"
                     width="120">
                 <template scope="scope">
                     <el-button @click="chooseRowEdit(scope.$index,scope.row)" type="text" size="small">{{buttonEdit}}</el-button>
-                    <el-button @click="chooseRowRemove(scope.$index, scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
+                    <el-button @click="chooseRowRemove(scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
                 </template>
             </el-table-column>
             </el-table>
@@ -60,9 +61,9 @@
                         :placeholder="formText.users.placeholder">
                     <el-option
                             v-for="user in users"
-                            :key="item.id"
-                            :label="item.name"
-                            :value="item.id">
+                            :key="user.id"
+                            :label="user.email"
+                            :value="user.id">
                     </el-option>
                 </el-select>
                 </el-form-item>
@@ -115,6 +116,7 @@
         theme: '',
         text: '',
         mode: '',
+        users:'',
     };
     export default {
         methods: {
@@ -126,19 +128,21 @@
                 this.form.theme = row.email.theme;
                 this.form.text  = row.email.text;
                 this.form.mode  = row.mode.id;
+                this.form.users =  Object.keys(row.email.users ).map(function(key) {
+                    return row.email.users[key]['id'];
+                });
                 //set in mode "edit"
                 this.modeWindow = modeWindow['edit']
             },
-            chooseRowRemove(index, row) {
+            chooseRowRemove(row) {
                 this.$confirm(this.formText.popup.question, this.formText.popup.title, {
                     confirmButtonText: this.formText.popup.confirmButtonText,
                     cancelButtonText: this.formText.popup.cancelButtonText,
                     type: 'warning'
                 }).then(() => {
-                    console.log( index, row );
                     this.$http.delete('/postman/api/dashboard.table.tasks.remove/' + row.id)
                         .then(() => {
-                            this.tableData.splice(index, 1);
+                            this.syncData();
                             this.$message({
                                 type: 'success',
                                 message: this.formText.popup['success.message']
@@ -192,6 +196,7 @@
                 listMode:[],
                 modeWindow:'',
                 сurrentIndex:'',
+                errorMessage:'',
                 users:[],
                 dialogFormVisible:false,
                 formText:{
@@ -234,7 +239,8 @@
                             this.tableData = response.data;
                             this.flagFetchData = true;
                         })
-                        .catch(() => {
+                        .catch((response) => {
+                            this.errorMessage = response.message;
                             this.flagFetchError = true
                         })
                 }

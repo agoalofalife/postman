@@ -19,7 +19,6 @@ class SheduleEmail extends Model
         'status_action' => 'boolean',
     ];
 
-
     /**
      * Get the status action.
      *
@@ -28,9 +27,6 @@ class SheduleEmail extends Model
      */
     public function getStatusActionAttribute($value)
     {
-
-
-        // dd("postman::dashboard.status_action." + boolval($value));
         return trans("postman::dashboard.status_action." . $value);
     }
 
