@@ -10,7 +10,7 @@ class ParserTest extends TestCase
 
     public function testS()
     {
-
+        dd(Email::all());
         dd(factory(Email::class)->create());
     }
 }

@@ -4,7 +4,6 @@ namespace agoalofalife\Tests;
 use Mockery;
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
-use Illuminate\Contracts\Console\Kernel;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
