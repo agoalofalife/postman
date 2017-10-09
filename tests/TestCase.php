@@ -9,6 +9,16 @@ use Illuminate\Container\Container;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
+    public function setUp()
+    {
+        /**
+         * Init factory model eloquent
+         */
+        app()->singleton(EloquentFactory::class, function ($app){
+            return EloquentFactory::construct(Factory::create(), __DIR__.'/../database/factories/');
+        });
+    }
+
     protected function tearDown(): void
     {
         parent::tearDown();
