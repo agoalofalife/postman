@@ -3,7 +3,6 @@ namespace agoalofalife\postman;
 
 use agoalofalife\postman\Models\SheduleEmail;
 use Carbon\Carbon;
-use Illuminate\Console\Scheduling\Schedule;
 
 /**
  * Class Parser

@@ -1,30 +1,22 @@
 <?php
 namespace agoalofalife\Tests;
 
+use agoalofalife\postman\SheduleEmailServiceProvider;
 use Mockery;
-use Faker\Factory;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
-use  Orchestra\Testbench\TestCase as Testbench;
+use Orchestra\Testbench\TestCase as Testbench;
 
 abstract class TestCase extends Testbench
 {
-    /**
-     * Factory @var
-     */
-    protected $factory;
-
-    /**
-     * @var
-     */
-    protected $app;
-
-
     public function setUp()
     {
         parent::setUp();
-
-        $this->artisan('migrate', ['--database' => 'testing']);
+        $this->artisan('migrate');
         $this->withFactories(__DIR__.'/../database/factories');
+    }
+
+    protected function getPackageProviders($app) : array
+    {
+        return [SheduleEmailServiceProvider::class];
     }
 
     /**
@@ -33,7 +25,7 @@ abstract class TestCase extends Testbench
      * @param  \Illuminate\Foundation\Application  $app
      * @return void
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app) : void
     {
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
@@ -55,7 +47,7 @@ abstract class TestCase extends Testbench
      *
      * @return \Mockery\Mock|mixed
      */
-    protected function mock(string $class)
+    protected function mock(string $class) : Mockery
     {
         return Mockery::mock($class);
     }
@@ -70,5 +62,4 @@ abstract class TestCase extends Testbench
             $this->assertArrayHasKey($key, $source);
         }, $keys);
     }
-
 }
