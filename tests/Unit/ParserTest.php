@@ -2,15 +2,12 @@
 namespace agoalofalife\Tests;
 
 use agoalofalife\postman\Models\Email;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ParserTest extends TestCase
 {
-    use DatabaseMigrations;
-
     public function testS()
     {
-        dd(Email::all());
+//        $this->loadLaravelMigrations(['--database' => 'testbench']);
         dd(factory(Email::class)->create());
     }
 }

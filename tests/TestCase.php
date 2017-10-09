@@ -4,8 +4,9 @@ namespace agoalofalife\Tests;
 use Mockery;
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
+use  Orchestra\Testbench\TestCase as Testbench;
 
-abstract class TestCase extends \PHPUnit\Framework\TestCase
+abstract class TestCase extends Testbench
 {
     /**
      * Factory @var
@@ -17,19 +18,30 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected $app;
 
+
     public function setUp()
     {
-        $this->factory = Factory::create();
-        $app = require __DIR__.'/bootstrap/autoload.php';
+        parent::setUp();
 
-        /**
-         * Init factory model eloquent
-         */
-        $app->singleton(EloquentFactory::class, function ($app){
-            return EloquentFactory::construct($this->factory, __DIR__.'/../database/factories/');
-        });
+        $this->artisan('migrate', ['--database' => 'testing']);
+        $this->withFactories(__DIR__.'/../database/factories');
+    }
 
-        $app->loadEnvironmentFrom('.env.testing');
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        // Setup default database to use sqlite :memory:
+        $app['config']->set('database.default', 'testbench');
+        $app['config']->set('database.connections.testbench', [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ]);
     }
 
     protected function tearDown(): void
