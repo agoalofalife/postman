@@ -1,15 +1,16 @@
 <?php
 namespace agoalofalife\Tests;
 
-use Faker\Generator as FakerGenerator;
 use agoalofalife\postman\Models\Email;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
-use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ParserTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function testS()
     {
-        dd(factory(Email::class, 3)->make());
+
+        dd(factory(Email::class)->create());
     }
 }

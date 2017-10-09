@@ -3,30 +3,40 @@ namespace agoalofalife\Tests;
 
 use Mockery;
 use Faker\Factory;
-use Faker\Generator;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
-use Illuminate\Container\Container;
+use Illuminate\Contracts\Console\Kernel;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * Factory @var
+     */
+    protected $factory;
+
+    /**
+     * @var
+     */
+    protected $app;
+
     public function setUp()
     {
+        $this->factory = Factory::create();
+        $app = require __DIR__.'/bootstrap/autoload.php';
+
         /**
          * Init factory model eloquent
          */
-        app()->singleton(EloquentFactory::class, function ($app){
-            return EloquentFactory::construct(Factory::create(), __DIR__.'/../database/factories/');
+        $app->singleton(EloquentFactory::class, function ($app){
+            return EloquentFactory::construct($this->factory, __DIR__.'/../database/factories/');
         });
+
+        $app->loadEnvironmentFrom('.env.testing');
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
         Mockery::close();
-    }
-    protected function faker(): Generator
-    {
-        return Factory::create();
     }
 
     /**
