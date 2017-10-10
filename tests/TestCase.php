@@ -16,8 +16,9 @@ abstract class TestCase extends Testbench
     }
     protected function tearDown(): void
     {
+//        Mockery::close();
         parent::tearDown();
-        Mockery::close();
+
     }
 
     protected function getPackageProviders($app) : array
