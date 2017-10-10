@@ -16,7 +16,7 @@ class OneToAll implements Mode
     /**
      * @param SheduleEmail $tasks
      */
-    public function postEmail(SheduleEmail $tasks)
+    public function postEmail(SheduleEmail $tasks) : void
     {
          Mail::raw($tasks->email->text, function ($message) use ($tasks) {
             $message->subject($tasks->email->theme);
