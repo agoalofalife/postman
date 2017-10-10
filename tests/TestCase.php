@@ -10,8 +10,14 @@ abstract class TestCase extends Testbench
     public function setUp()
     {
         parent::setUp();
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
         $this->artisan('migrate');
         $this->withFactories(__DIR__.'/../database/factories');
+    }
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        Mockery::close();
     }
 
     protected function getPackageProviders($app) : array
@@ -36,18 +42,13 @@ abstract class TestCase extends Testbench
         ]);
     }
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        Mockery::close();
-    }
 
     /**
      * @param string $class
      *
      * @return \Mockery\Mock|mixed
      */
-    protected function mock(string $class) : Mockery
+    protected function mock(string $class)
     {
         return Mockery::mock($class);
     }

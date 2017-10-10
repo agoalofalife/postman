@@ -4,15 +4,17 @@ namespace agoalofalife\postman;
 use agoalofalife\postman\Contract\Mode;
 use agoalofalife\postman\Modes\Each;
 use agoalofalife\postman\Modes\OneToAll;
-use Dompdf\Exception;
 
+/**
+ * Class FactoryMode
+ * @package agoalofalife\postman
+ */
 class FactoryMode
 {
     /**
      * @param $mode
      * @return Mode
-     * @throws Exception
-     * r
+     * @throws \Exception
      */
     public static function get($mode)
     {
@@ -22,7 +24,7 @@ class FactoryMode
             case '2':
                 return new Each();
             default:
-                throw new Exception("Mode not defined");
+                throw new \Exception("Mode not defined");
         }
     }
 }
