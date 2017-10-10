@@ -27,7 +27,8 @@ class DashboardController
      */
     public function index()
     {
-        return SheduleEmail::with('email.users')->with('mode')->get();
+//        dd(SheduleEmail::with(['email.users', 'mode'])->get()->toArray());
+        return SheduleEmail::with(['email.users', 'mode'])->get();
     }
 
     /**
