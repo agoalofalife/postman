@@ -14,7 +14,6 @@ use agoalofalife\postman\Parser;
  */
 class ParserTest extends TestCase
 {
-
     public function testParse() : void
     {
         factory(SheduleEmail::class, 10)->create([

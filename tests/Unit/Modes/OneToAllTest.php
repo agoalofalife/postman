@@ -1,12 +1,22 @@
 <?php
 namespace agoalofalife\Tests\Modes;
 
+use agoalofalife\postman\Models\SheduleEmail;
+use agoalofalife\postman\Modes\OneToAll;
 use agoalofalife\Tests\TestCase;
+use Illuminate\Support\Facades\Mail;
 
 class OneToAllTest extends TestCase
 {
-    public function test_test()
+    public function testPostEmail() : void
     {
-        $this->assertFalse(false);
+        factory(SheduleEmail::class, 10)->create();
+        $shedule = SheduleEmail::all()->random();
+        Mail::shouldReceive('raw')->once()->with($shedule->email->text, \Mockery::type('callable'));
+        Mail::shouldReceive('failures')->once()->andReturn([]);
+
+        (new OneToAll)->postEmail($shedule);
+
+        $this->assertEquals(1, SheduleEmail::find($shedule->id)->getOriginal()['status_action']);
     }
 }
