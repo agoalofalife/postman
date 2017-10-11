@@ -7,45 +7,35 @@ use agoalofalife\postman\Models\EmailUser;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
 use agoalofalife\postman\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class DashboardController
 {
     /**
-     * Size column ui
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[] | void
      */
-    protected $nameColumns;
-
-    public function __construct()
-    {   // set sizes column in table
-        $this->nameColumns = config('postman.ui.table');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
-     */
-    public function index()
+    public function index() : Collection
     {
-//        dd(SheduleEmail::with(['email.users', 'mode'])->get()->toArray());
         return SheduleEmail::with(['email.users', 'mode'])->get();
     }
 
     /**
      * Get list modes
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function listMode()
+    public function listMode() : JsonResponse
     {
         return response()->json(ModePostEmail::all());
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return JsonResponse
      */
-    public function users()
+    public function users() : JsonResponse
     {
-        return User::all();
+        return response()->json(User::all());
     }
 
     /**
@@ -55,7 +45,8 @@ class DashboardController
     public function tableColumn()
     {
         $response = [];
-        foreach ($this->nameColumns as $column => $size) {
+        dd(config('postman.ui.table'));
+        foreach (config('postman.ui.table') as $column => $size) {
             $response['columns'][] = [
                 'prop' => $column,
                 'size' => $size,
