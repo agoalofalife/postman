@@ -73,8 +73,73 @@ class DashboardControllerTest extends TestCase
     public function testTableColumn() : void
     {
         $this->get('/postman/api/dashboard.table.column')->assertJsonStructure([
-            '*' => []
+            'columns' => [
+                '*' => [
+                    'prop',
+                    'size',
+                    'label'
+                ],
+            ]
+        ])->assertJsonStructure([
+            'button' => [
+                'edit',
+                'remove'
+            ]
         ])->assertStatus(200);
+    }
 
+    public function testFormColumn() : void
+    {
+        $this->get('/postman/api/dashboard.table.formColumn')->assertJsonStructure([
+            'date' => [
+                'label',
+                'rule' => [
+                    'required',
+                    'message',
+                    'trigger',
+                ],
+            ],
+            'theme' => [
+                    'label'
+                ],
+                'text' => [
+                    'label'
+                ],
+                'type' => [
+                    'label',
+                    'placeholder'
+                ],
+                'users' => [
+                    'label',
+                    'placeholder'
+                ],
+                'button' => [
+                    'success',
+                    'cancel'
+                ],
+                'popup' => [
+                    'question',
+                    'title',
+                    'confirmButtonText',
+                    'cancelButtonText',
+                    'success.message',
+                    'info.message'
+                ]
+        ]);
+    }
+
+    public function testCreateTask() : void
+    {
+        $users = factory(User::class, 3)->create()->map(function ($value) {return $value->id;});
+        $this->seed('ModePostEmailSeeder');
+        $this->post('/postman/api/dashboard.table.tasks.create',[
+            'theme' => $this->faker()->word,
+            'text' => $this->faker()->text,
+            'users' => $users,
+            'date' => $this->faker()->date('Y-m-d H:i:s'),
+            'mode' => ModePostEmail::all()->random(),
+        ]) ->assertJson([
+            'status' => true,
+        ]);;
     }
 }

@@ -4,6 +4,7 @@ namespace agoalofalife\Tests;
 use agoalofalife\postman\SheduleEmailServiceProvider;
 use Mockery;
 use Orchestra\Testbench\TestCase as Testbench;
+use Faker\Factory;
 
 abstract class TestCase extends Testbench
 {
@@ -63,5 +64,9 @@ abstract class TestCase extends Testbench
         array_map(function ($key) use ($source) {
             $this->assertArrayHasKey($key, $source);
         }, $keys);
+    }
+    protected function faker()
+    {
+        return Factory::create();
     }
 }

@@ -43,7 +43,7 @@ class DashboardController
      * Get table column
      * @return \Illuminate\Http\JsonResponse
      */
-    public function tableColumn()
+    public function tableColumn() : JsonResponse
     {
         $response = [];
 
@@ -59,7 +59,7 @@ class DashboardController
             'edit' => trans('postman::dashboard.button.edit'),
             'remove' => trans('postman::dashboard.button.remove'),
         ];
-        dd($response);
+
         return response()->json($response);
     }
 
@@ -103,6 +103,7 @@ class DashboardController
               'info.message' => trans('postman::dashboard.popup.info.message'),
             ],
         ];
+
         return response()->json($forms);
     }
 
