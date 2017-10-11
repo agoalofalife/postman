@@ -46,13 +46,13 @@ class DashboardController
     {
         $response = [];
         dd(config('postman.ui.table'));
-        foreach (config('postman.ui.table') as $column => $size) {
-            $response['columns'][] = [
-                'prop' => $column,
-                'size' => $size,
-                'label' => trans("postman::dashboard.{$column}")
-            ];
-        }
+//        foreach (config('postman.ui.table') as $column => $size) {
+//            $response['columns'][] = [
+//                'prop' => $column,
+//                'size' => $size,
+//                'label' => trans("postman::dashboard.{$column}")
+//            ];
+//        }
         
         $response['button'] = [
             'edit' => trans('postman::dashboard.button.edit'),
