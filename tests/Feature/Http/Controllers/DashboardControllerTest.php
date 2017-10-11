@@ -198,7 +198,15 @@ class DashboardControllerTest extends TestCase
             'email_id' => $task->email->id,
             'user_id' => $users->random(),
         ]);
-
     }
 
+    public function testRemove() : void
+    {
+        $task = factory(SheduleEmail::class)->create();
+
+        $this->delete('/postman/api/dashboard.table.tasks.remove/' . $task->id)->assertStatus(200);
+        $this->assertSoftDeleted('shedule_emails', [
+            'id' => $task->id
+        ]);
+    }
 }

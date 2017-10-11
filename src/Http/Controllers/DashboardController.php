@@ -167,6 +167,7 @@ class DashboardController
      */
     public function remove($id)
     {
+
         SheduleEmail::destroy($id);
         return response()->json(true);
     }
