@@ -130,8 +130,10 @@ class DashboardControllerTest extends TestCase
 
     public function testCreateTask() : void
     {
+
         $users = factory(User::class, 3)->create()->map(function ($value) {return $value->id;});
-        $this->seed('ModePostEmailSeeder');
+        $this->artisan('postman:seed');
+//        $this->seed('ModePostEmailSeeder');
         $this->post('/postman/api/dashboard.table.tasks.create',[
             'theme' => $this->faker()->word,
             'text' => $this->faker()->text,

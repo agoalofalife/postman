@@ -36,6 +36,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/postman'),
         ], 'postman-migration');
 
+
         $this->publishes([
             __DIR__.'/../database/seeds' => database_path('seeds'),
         ], 'postman-migration');
@@ -53,7 +54,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
         });
 
         $this->mergeConfigFrom(
-            __DIR__.'../config/courier.php', 'postman'
+            __DIR__.'/../config/postman.php', 'postman'
         );
     }
 
