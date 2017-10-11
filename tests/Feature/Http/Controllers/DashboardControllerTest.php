@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 class DashboardControllerTest extends TestCase
 {
     use InteractsWithDatabase;
+
     public function setUp()
     {
         parent::setUp();
@@ -145,7 +146,7 @@ class DashboardControllerTest extends TestCase
             'users' => $users->toArray(),
             'date' => $date,
             'mode' => $mode,
-        ]) ->assertJson([
+        ])->assertJson([
             'status' => true,
         ]);
 
@@ -164,4 +165,40 @@ class DashboardControllerTest extends TestCase
             'status_action' => 0
         ]);
     }
+
+    public function testUpdateTask() : void
+    {
+        $task = factory(SheduleEmail::class)->create();
+        $theme = $this->faker()->word;
+        $text  = $this->faker()->text;
+        $mode  = ModePostEmail::all()->random()->id;
+        $date  = $this->faker()->date('Y-m-d H:i:s');
+        $users = factory(User::class, 3)->create()->map(function ($value) {return $value->id;});
+
+        $this->put('/postman/api/dashboard.table.tasks.update',[
+            'id' => $task->id,
+            'mode' => $mode,
+            'date' => $date,
+            'theme' => $theme,
+            'text' => $text,
+            'users' => $users->toArray()
+        ])->assertJson([
+            'status' => true,
+        ]);
+
+        $this->assertDatabaseHas('shedule_emails', [
+            'mode_id' => $mode,
+            'date' => $date,
+        ]);
+        $this->assertDatabaseHas('emails', [
+            'theme' => $theme,
+            'text' => $text,
+        ]);
+        $this->assertDatabaseHas('email_user', [
+            'email_id' => $task->email->id,
+            'user_id' => $users->random(),
+        ]);
+
+    }
+
 }
