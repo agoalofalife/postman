@@ -13,7 +13,6 @@ use Illuminate\Support\Collection;
 
 class DashboardController
 {
-
     /**
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[] | void
      */
@@ -119,6 +118,7 @@ class DashboardController
             'theme' => $request->theme,
             'text' => $request->text,
         ]);
+
         array_map(function($user_id) use($email) {
             EmailUser::create([
                 'user_id' => $user_id,

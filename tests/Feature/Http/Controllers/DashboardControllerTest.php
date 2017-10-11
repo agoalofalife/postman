@@ -6,9 +6,11 @@ use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
 use agoalofalife\Tests\TestCase;
 use agoalofalife\postman\Models\User;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 
 class DashboardControllerTest extends TestCase
 {
+    use InteractsWithDatabase;
     public function setUp()
     {
         parent::setUp();
@@ -130,18 +132,36 @@ class DashboardControllerTest extends TestCase
 
     public function testCreateTask() : void
     {
-
         $users = factory(User::class, 3)->create()->map(function ($value) {return $value->id;});
         $this->artisan('postman:seed');
-//        $this->seed('ModePostEmailSeeder');
+
+        $theme = $this->faker()->word;
+        $text  = $this->faker()->text;
+        $mode  = ModePostEmail::all()->random()->id;
+        $date  = $this->faker()->date('Y-m-d H:i:s');
         $this->post('/postman/api/dashboard.table.tasks.create',[
-            'theme' => $this->faker()->word,
-            'text' => $this->faker()->text,
-            'users' => $users,
-            'date' => $this->faker()->date('Y-m-d H:i:s'),
-            'mode' => ModePostEmail::all()->random(),
+            'theme' => $theme,
+            'text' => $text,
+            'users' => $users->toArray(),
+            'date' => $date,
+            'mode' => $mode,
         ]) ->assertJson([
             'status' => true,
-        ]);;
+        ]);
+
+        $this->assertDatabaseHas('emails', [
+            'theme' => $theme,
+            'text' => $text
+        ]);
+
+        $this->assertDatabaseHas('email_user', [
+            'user_id' => $users->random(),
+        ]);
+
+        $this->assertDatabaseHas('shedule_emails', [
+            'date' => $date,
+            'mode_id' => $mode,
+            'status_action' => 0
+        ]);
     }
 }
