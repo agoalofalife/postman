@@ -13,6 +13,7 @@ use Illuminate\Support\Collection;
 
 class DashboardController
 {
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[] | void
      */
@@ -45,14 +46,14 @@ class DashboardController
     public function tableColumn()
     {
         $response = [];
-        dd(config('postman.ui.table'));
-//        foreach (config('postman.ui.table') as $column => $size) {
-//            $response['columns'][] = [
-//                'prop' => $column,
-//                'size' => $size,
-//                'label' => trans("postman::dashboard.{$column}")
-//            ];
-//        }
+
+        foreach (config('postman.ui.table') as $column => $size) {
+            $response['columns'][] = [
+                'prop' => $column,
+                'size' => $size,
+                'label' => trans("postman::dashboard.{$column}")
+            ];
+        }
         
         $response['button'] = [
             'edit' => trans('postman::dashboard.button.edit'),

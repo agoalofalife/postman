@@ -9,6 +9,11 @@ use agoalofalife\postman\Models\User;
 
 class DashboardControllerTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+    }
+
     public function testIndex() : void
     {
         factory(SheduleEmail::class, 5)->create();
@@ -68,15 +73,7 @@ class DashboardControllerTest extends TestCase
     public function testTableColumn() : void
     {
         $this->get('/postman/api/dashboard.table.column')->assertJsonStructure([
-            '*' => [
-                'id',
-                'name',
-                'email',
-                'password',
-                'remember_token',
-                'created_at',
-                'updated_at',
-            ]
+            '*' => []
         ])->assertStatus(200);
 
     }

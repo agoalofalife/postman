@@ -48,6 +48,10 @@ class SheduleEmailServiceProvider extends ServiceProvider
         Request::macro('datePostman', function (Request $request) {
             $request-> date =  Carbon::parse($request->date)->toDateTimeString();
         });
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/postman.php', 'postman'
+        );
     }
 
     /**
