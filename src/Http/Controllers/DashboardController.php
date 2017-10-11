@@ -59,6 +59,7 @@ class DashboardController
             'edit' => trans('postman::dashboard.button.edit'),
             'remove' => trans('postman::dashboard.button.remove'),
         ];
+        dd($response);
         return response()->json($response);
     }
 
