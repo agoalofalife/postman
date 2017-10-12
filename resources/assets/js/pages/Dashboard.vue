@@ -164,6 +164,7 @@
             },
             editTask() {
                 this.clickSubmit = true;
+                this.errors = {};
                 this.$http[this.modeWindow.method](this.modeWindow.url, {
                     id : this.form.id,
                     date : this.normalizeDate(this.form.date),

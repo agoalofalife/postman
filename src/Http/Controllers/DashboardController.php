@@ -2,7 +2,7 @@
 
 namespace agoalofalife\postman\Http\Controllers;
 
-use agoalofalife\postman\Http\Requests\CreateTaskRequest;
+use agoalofalife\postman\Http\Requests\TaskRequest;
 use agoalofalife\postman\Models\Email;
 use agoalofalife\postman\Models\EmailUser;
 use agoalofalife\postman\Models\ModePostEmail;
@@ -108,10 +108,10 @@ class DashboardController
     }
 
     /**
-     * @param CreateTaskRequest $request
+     * @param TaskRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function createTask(CreateTaskRequest $request)
+    public function createTask(TaskRequest $request)
     {
         $request->datePostman($request);
 
