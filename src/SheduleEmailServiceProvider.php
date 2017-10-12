@@ -21,9 +21,26 @@ class SheduleEmailServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'postman');
+
+        $this->registerRoutes();
+        $this->commands([
+            Console\InstallCommand::class,
+            Console\SeederCommand::class,
+            Console\ParseCommand::class,
+        ]);
+        $this->loadViews();
+
+        Request::macro('datePostman', function (Request $request) {
+            $request-> date =  Carbon::parse($request->date)->toDateTimeString();
+        });
+        $this->mergeConfigFrom(__DIR__.'/../config/postman.php', 'postman');
+        $this->publishesAll();
+    }
+
+    public function publishesAll() : void
+    {
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'postman-migration');
@@ -41,23 +58,10 @@ class SheduleEmailServiceProvider extends ServiceProvider
             __DIR__.'/../database/seeds' => database_path('seeds'),
         ], 'postman-migration');
 
-        $this->registerRoutes();
-        $this->commands([
-            Console\InstallCommand::class,
-            Console\SeederCommand::class,
-            Console\ParseCommand::class,
-        ]);
-        $this->loadViews();
-
-        Request::macro('datePostman', function (Request $request) {
-            $request-> date =  Carbon::parse($request->date)->toDateTimeString();
-        });
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/postman.php', 'postman'
-        );
+        $this->publishes([
+            __DIR__.'/../resources/assets/js/components' => base_path('resources/assets/js/components/postman'),
+        ], 'postman-components');
     }
-
     /**
      * Register the postman routes.
      *

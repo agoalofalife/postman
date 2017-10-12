@@ -5,5 +5,15 @@
 </script>
 
 <template>
-    <router-view/>
+    <dashboard></dashboard>
 </template>
+
+<script>
+    import Dashboard from '../pages/Dashboard.vue';
+
+    export default {
+        components: {
+            'dashboard': Dashboard
+        }
+    }
+</script>
