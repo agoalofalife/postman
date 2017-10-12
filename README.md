@@ -19,3 +19,12 @@ php artisan postman:install
   
   locale in config.php (seed)
 ```
+
+## Blade
+
+
+```
+
+    @include('postman::app')
+
+```
