@@ -41,7 +41,7 @@
 
         <el-dialog :visible.sync="dialogFormVisible">
         <el-col  :span="18" :offset="3"  class="form-edit">
-            <el-form :model="form" label-width="120px">
+            <el-form :model="form" label-width="120px" v-loading="clickMo">
                 <el-form-item :label="formText.date.label" prop="date">
                     <el-date-picker type="datetime"  v-model="form.date"></el-date-picker>
                 </el-form-item>
