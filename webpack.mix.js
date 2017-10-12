@@ -23,7 +23,6 @@ mix
     // .copy('resources/assets/img', 'public/img')
     // .copyDirectory('public/fonts', 'public/fonts') 
     .sourceMaps()
-
     .version();
 
 
