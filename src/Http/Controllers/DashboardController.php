@@ -2,6 +2,7 @@
 
 namespace agoalofalife\postman\Http\Controllers;
 
+use agoalofalife\postman\Http\Requests\CreateTaskRequest;
 use agoalofalife\postman\Models\Email;
 use agoalofalife\postman\Models\EmailUser;
 use agoalofalife\postman\Models\ModePostEmail;
@@ -107,10 +108,10 @@ class DashboardController
     }
 
     /**
-     * @param Request $request
+     * @param CreateTaskRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function createTask(Request $request)
+    public function createTask(CreateTaskRequest $request)
     {
         $request->datePostman($request);
 
@@ -167,7 +168,6 @@ class DashboardController
      */
     public function remove($id)
     {
-
         SheduleEmail::destroy($id);
         return response()->json(true);
     }

@@ -1,6 +1,5 @@
 <template>
     <div>
-
     <el-row class="table-postman">
         <el-col :span="16" :offset="3" v-show="flagFetchData">
             <i class="el-icon-plus" @click="createTask"> </i>
@@ -41,7 +40,10 @@
 
         <el-dialog :visible.sync="dialogFormVisible">
         <el-col  :span="18" :offset="3"  class="form-edit">
-            <el-form :model="form" label-width="120px" v-loading="clickMo">
+            <ul style="color:#FF4949" v-for="(value, key, index) in errors">
+                <li v-for="err in value">{{ err }} </li>
+            </ul>
+            <el-form :model="form" label-width="120px" v-loading="clickSubmit">
                 <el-form-item :label="formText.date.label" prop="date">
                     <el-date-picker type="datetime"  v-model="form.date"></el-date-picker>
                 </el-form-item>
@@ -161,6 +163,7 @@
                 });
             },
             editTask() {
+                this.clickSubmit = true;
                 this.$http[this.modeWindow.method](this.modeWindow.url, {
                     id : this.form.id,
                     date : this.normalizeDate(this.form.date),
@@ -168,14 +171,17 @@
                     text : this.form.text,
                     mode : this.form.mode,
                     users:this.form.users,
-                })
-                    .then(response => {
+                }).then(response => {
                         if (response.data.status) {
                             this.syncData().then(() => {
                                 this.dialogFormVisible = false;
+
                             });
                         }
-                    });
+                    }).catch( response => {
+                        this.errors = response.response.data.errors
+                });
+                this.clickSubmit = false;
             },
             cancelForm() {
                 this.dialogFormVisible = false;
@@ -183,8 +189,7 @@
             createTask(){
                 this.form = Object.assign(this.form, stubForm);
                 this.dialogFormVisible = true;
-                this.modeWindow = modeWindow['create'];
-
+                this.modeWindow = modeWindow['create']
             }
         },
         data() {
@@ -198,12 +203,14 @@
                 listMode:[],
                 modeWindow:'',
                 сurrentIndex:'',
+                errors:{},
                 columnAction:{
                     label:'Operations',
                     size: 120,
                 },
                 errorMessage:'',
                 users:[],
+                clickSubmit:false,
                 dialogFormVisible:false,
                 formText:{
                     date : {
@@ -277,6 +284,5 @@
                     this.listMode = response.data
                 })
         },
-
     }
 </script>
