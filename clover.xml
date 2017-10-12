@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1507800931">
-  <project timestamp="1507800931">
+<coverage generated="1507806542">
+  <project timestamp="1507806542">
     <package name="agoalofalife\postman\Console">
       <file name="/var/www/html/conti-truck/packages/agoalofalife/postman/src/Console/InstallCommand.php">
         <class name="InstallCommand" namespace="agoalofalife\postman\Console">
@@ -209,8 +209,8 @@
         <class name="Email" namespace="agoalofalife\postman\Models">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
         </class>
-        <line num="11" type="method" name="users" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="13" type="stmt" count="1"/>
+        <line num="11" type="method" name="users" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="13" type="stmt" count="2"/>
         <line num="16" type="method" name="tasks" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="18" type="stmt" count="1"/>
         <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
@@ -257,18 +257,18 @@
       </file>
       <file name="/var/www/html/conti-truck/packages/agoalofalife/postman/src/Modes/OneToAll.php">
         <class name="OneToAll" namespace="agoalofalife\postman\Modes" fullPackage="agoalofalife" package="agoalofalife">
-          <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+          <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
         </class>
-        <line num="21" type="method" name="anonymousFunction:21#85" complexity="1" crap="2" count="0"/>
-        <line num="22" type="stmt" count="0"/>
-        <line num="23" type="stmt" count="0"/>
-        <line num="24" type="stmt" count="0"/>
-        <line num="26" type="method" name="anonymousFunction:26#141" complexity="1" crap="2" count="0"/>
-        <line num="27" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="0"/>
-        <metrics loc="36" ncloc="26" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+        <line num="21" type="method" name="anonymousFunction:21#85" complexity="1" crap="1" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="26" type="method" name="anonymousFunction:26#141" complexity="1" crap="1" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="28" type="stmt" count="1"/>
+        <metrics loc="36" ncloc="26" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
       </file>
     </package>
-    <metrics files="17" loc="599" ncloc="463" classes="13" methods="31" coveredmethods="24" conditionals="0" coveredconditionals="0" statements="126" coveredstatements="110" elements="157" coveredelements="134"/>
+    <metrics files="17" loc="599" ncloc="463" classes="13" methods="31" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="126" coveredstatements="115" elements="157" coveredelements="141"/>
   </project>
 </coverage>

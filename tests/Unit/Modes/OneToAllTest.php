@@ -4,19 +4,29 @@ namespace agoalofalife\Tests\Modes;
 use agoalofalife\postman\Models\SheduleEmail;
 use agoalofalife\postman\Modes\OneToAll;
 use agoalofalife\Tests\TestCase;
+use agoalofalife\postman\Models\EmailUser;
+use agoalofalife\postman\Models\User;
 use Illuminate\Support\Facades\Mail;
+use MailThief\Testing\InteractsWithMail;
 
 class OneToAllTest extends TestCase
 {
+    use InteractsWithMail;
+
     public function testPostEmail() : void
     {
-        factory(SheduleEmail::class, 10)->create();
-        $shedule = SheduleEmail::all()->random();
-        Mail::shouldReceive('raw')->once()->with($shedule->email->text, \Mockery::type('callable'));
-        Mail::shouldReceive('failures')->once()->andReturn([]);
+        $email =  factory(SheduleEmail::class)->create();
+        $user  = factory(User::class)->create();
 
-        (new OneToAll)->postEmail($shedule);
+        $email =  factory(EmailUser::class)->create([
+            'email_id' => $email->id,
+            'user_id' => $user->id,
+        ]);
+        $task = SheduleEmail::all()->random();
 
-        $this->assertEquals(1, SheduleEmail::find($shedule->id)->getOriginal()['status_action']);
+        (new OneToAll)->postEmail($task);
+
+        $this->seeMessageWithSubject($task->email->theme);
+        $this->seeMessageFor($user->email);
     }
 }
