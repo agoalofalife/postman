@@ -140,7 +140,7 @@ class DashboardController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateTask(Request $request)
+    public function updateTask(TaskRequest $request)
     {
         $request->datePostman($request);
         $task = SheduleEmail::find($request->id);

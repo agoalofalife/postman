@@ -124,6 +124,7 @@
     export default {
         methods: {
             chooseRowEdit(index, row) {
+                this.errors = {};
                 this.dialogFormVisible = true;
                 this.сurrentIndex = index;
                 this.form.id = row.id;
@@ -180,7 +181,7 @@
                             });
                         }
                     }).catch( response => {
-                        this.errors = response.response.data.errors
+                        this.errors = response.response.data
                 });
                 this.clickSubmit = false;
             },
