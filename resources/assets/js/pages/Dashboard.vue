@@ -17,13 +17,16 @@
             <el-table
             :data="tableData"
             border
-            style="width: 100%">
-
+            style="width: 100%"
+            :row-class-name="tableRowClassName"
+            >
             <el-table-column v-for="(column, index) in columns"
                          :key="column.prop"
                          :prop="column.prop"
+                             sortable
                          :label="column.label"
-                         :width="column.size">
+                         :width="column.size"
+                >
             </el-table-column>
             <el-table-column
                      fixed="right"
@@ -31,8 +34,8 @@
                      :width="columnAction.size"
                     >
                 <template scope="scope">
-                    <el-button @click="chooseRowEdit(scope.$index,scope.row)" type="text" size="small">{{buttonEdit}}</el-button>
-                    <el-button @click="chooseRowRemove(scope.row)" type="text" size="small">{{ buttonRemove }}</el-button>
+                    <el-button @click="chooseRowEdit(scope.$index,scope.row)" size="small">{{buttonEdit}}</el-button>
+                    <el-button @click="chooseRowRemove(scope.row)" type="danger"  size="small">{{ buttonRemove }}</el-button>
                 </template>
             </el-table-column>
             </el-table>
@@ -45,14 +48,14 @@
             </ul>
             <el-form :model="form" label-width="120px" v-loading="clickSubmit">
                 <el-form-item :label="formText.date.label" prop="date">
-                    <el-date-picker type="datetime"  v-model="form.date"></el-date-picker>
+                    <el-date-picker type="datetime" v-model="form.date"></el-date-picker>
                 </el-form-item>
                 <el-form-item :label="formText.theme.label" prop="theme">
                 <el-input placeholder="" v-model="form.theme"></el-input>
                 </el-form-item>
 
                 <el-form-item :label="formText.text.label" prop="text">
-                    <el-input type="textarea" v-model="form.text"></el-input>
+                    <vue-html5-editor :content="form.text" :height="200" @change="updateFormText($event)" :show-module-name="false"></vue-html5-editor>
                 </el-form-item>
 
                 <el-form-item :label="formText.users.label" prop="text">
@@ -97,6 +100,13 @@
     }
     .form-edit{
         margin-top: 2%
+    }
+    .el-table .info-row {
+        background: #c9e5f5;
+    }
+
+    .el-table .positive-row {
+        background: #e2f0e4;
     }
 </style>
 
@@ -259,6 +269,15 @@
                 this.form = Object.assign(this.form, stubForm);
                 this.dialogFormVisible = true;
                 this.modeWindow = modeWindow['create']
+            },
+            updateFormText($event){
+                this.form.text = $event;
+            },
+            tableRowClassName(row, index){
+                if (row.status_action == 1) {
+                    return 'positive-row';
+                }
+                return '';
             }
         },
         mounted: function () {

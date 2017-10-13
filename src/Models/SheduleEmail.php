@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SheduleEmail extends Model
 {
     use SoftDeletes;
+
     protected $fillable = ['date' , 'email_id', 'mode_id', 'status_action'];
 
     /**
@@ -25,9 +26,18 @@ class SheduleEmail extends Model
      * @param  string  $value
      * @return string
      */
-    public function getStatusActionAttribute($value)
+    public function getStatusActionAttribute($value) : string
     {
-        return trans("postman::dashboard.status_action." . $value);
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function getStatusActionHumanAttribute($value) : string
+    {
+        return trans("postman::dashboard.status_action." . $this->status_action);
     }
 
     public function email()

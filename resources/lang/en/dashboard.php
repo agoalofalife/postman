@@ -12,7 +12,7 @@ return [
     'users.name' => 'Users',
     'users.placeholder' => 'Choose',
 
-    'status_action' => 'Send status email',
+    'status_action_human' => 'Send status email',
     'updated_at' => 'Update At',
     'button.edit' => 'Edit',
     'button.remove' => 'Remove',

@@ -19,7 +19,12 @@ class DashboardController
      */
     public function index() : Collection
     {
-        return SheduleEmail::with(['email.users', 'mode'])->get();
+        $preData = SheduleEmail::with(['email.users', 'mode'])->get()->map(function ($value) {
+             $value->status_action_human = $value->status_action_human;
+             return $value;
+        });
+
+        return $preData;
     }
 
     /**

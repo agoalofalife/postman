@@ -17,6 +17,7 @@
     "moment": "^2.18.1",
     "phpunserialize": "1.*",
     "vue": "^2.2.0",
+    "vue-html5-editor": "^1.1.1",
     "vue-router": "^2.2.0"
   },
   "devDependencies": {

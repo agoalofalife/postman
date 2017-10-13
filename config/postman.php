@@ -8,9 +8,9 @@ return [
             'email.theme' => 180,
             'email.text' => 400,
             'mode.name' => 140,
-            'status_action' => 130,
+            'status_action_human' => 130,
             'updated_at' => 140,
-            'operations' => 160,
+            'operations' => 220,
         ]
     ]
 ];
