@@ -122,6 +122,73 @@
         users:'',
     };
     export default {
+        data() {
+            return {
+                flagFetchData:false,
+                flagFetchError:false,
+                buttonEdit:'',
+                buttonRemove:'',
+                columns:[],
+                tableData:[],
+                listMode:[],
+                modeWindow:'',
+                сurrentIndex:'',
+                errors:{},
+                columnAction:{
+                    label:'Operations',
+                    size: 120,
+                },
+                errorMessage:'',
+                users:[],
+                clickSubmit:false,
+                dialogFormVisible:false,
+                formText:{
+                    date : {
+                        label : 'Date of sending email'
+                    },
+                    theme:{
+                        label:'Subject email',
+                    },
+                    text : {
+                        label:'Text email',
+                    },
+                    type : {
+                        placeholder:'Choose',
+                        label :'Type of sending'
+                    },
+                    users : {
+                        placeholder:'Choose',
+                        label :'Users'
+                    },
+                    button : {
+                        success : 'Success',
+                        cancel:'Cancel',
+                    }
+                },
+                form: {
+                    id:'',
+                    date: '',
+                    theme: '',
+                    text: '',
+                    mode: '',
+                    users:[],
+                },
+                normalizeDate : function (date) {
+                    return moment(this.form.date).format('YYYY-MM-DD HH:mm:ss')
+                },
+                syncData: function () {
+                    return this.$http.get('/postman/api/dashboard.table.tasks')
+                        .then(response => {
+                            this.tableData = response.data;
+                            this.flagFetchData = true;
+                        })
+                        .catch((response) => {
+                            this.errorMessage = response.message;
+                            this.flagFetchError = true
+                        })
+                }
+            }
+        },
         methods: {
             chooseRowEdit(index, row) {
                 this.errors = {};
@@ -192,73 +259,6 @@
                 this.form = Object.assign(this.form, stubForm);
                 this.dialogFormVisible = true;
                 this.modeWindow = modeWindow['create']
-            }
-        },
-        data() {
-            return {
-                flagFetchData:false,
-                flagFetchError:false,
-                buttonEdit:'',
-                buttonRemove:'',
-                columns:[],
-                tableData:[],
-                listMode:[],
-                modeWindow:'',
-                сurrentIndex:'',
-                errors:{},
-                columnAction:{
-                    label:'Operations',
-                    size: 120,
-                },
-                errorMessage:'',
-                users:[],
-                clickSubmit:false,
-                dialogFormVisible:false,
-                formText:{
-                    date : {
-                        label : 'Date of sending email'
-                    },
-                    theme:{
-                        label:'Subject email',
-                    },
-                    text : {
-                        label:'Text email',
-                    },
-                    type : {
-                        placeholder:'Choose',
-                        label :'Type of sending'
-                    },
-                    users : {
-                        placeholder:'Choose',
-                        label :'Users'
-                    },
-                    button : {
-                        success : 'Success',
-                        cancel:'Cancel',
-                    }
-                },
-                form: {
-                  id:'',
-                  date: '',
-                  theme: '',
-                  text: '',
-                  mode: '',
-                  users:[],
-                },
-                normalizeDate : function (date) {
-                    return moment(this.form.date).format('YYYY-MM-DD HH:mm:ss')
-                },
-                syncData: function () {
-                    return this.$http.get('/postman/api/dashboard.table.tasks')
-                        .then(response => {
-                            this.tableData = response.data;
-                            this.flagFetchData = true;
-                        })
-                        .catch((response) => {
-                            this.errorMessage = response.message;
-                            this.flagFetchError = true
-                        })
-                }
             }
         },
         mounted: function () {

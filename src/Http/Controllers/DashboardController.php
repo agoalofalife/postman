@@ -137,7 +137,7 @@ class DashboardController
 
     /**
      * Update task
-     * @param Request $request
+     * @param TaskRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateTask(TaskRequest $request)

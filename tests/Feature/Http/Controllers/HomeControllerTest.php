@@ -5,8 +5,8 @@ use agoalofalife\Tests\TestCase;
 
 class HomeControllerTest extends TestCase
 {
-    public function testIndex()
+    public function testIndex() : void
     {
-        $this->get('/postman/dashboard')->assertSee('Дата отправки');
+        $this->get('/postman/');
     }
 }
