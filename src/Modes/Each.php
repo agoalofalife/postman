@@ -9,6 +9,7 @@ class Each implements Mode
 {
     /**
      * @param SheduleEmail $tasks
+     * @return mixed|void
      */
     public function postEmail(SheduleEmail $tasks)
     {
@@ -23,5 +24,23 @@ class Each implements Mode
             $tasks->status_action = 1;
             $tasks->save();
         }
+    }
+
+    /**
+     *  Get name mode
+     * @return string
+     */
+    public function getName(): string
+    {
+        return trans('postman::mode.two.name');
+    }
+
+    /**
+     * Get full description
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return trans('postman::mode.two.name');
     }
 }

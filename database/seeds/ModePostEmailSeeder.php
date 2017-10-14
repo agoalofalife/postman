@@ -13,16 +13,15 @@ class ModePostEmailSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run() : void
     {
-        ModePostEmail::firstOrCreate([
-            'name' => trans('postman::mode.one.name'),
-            'description' => trans('postman::mode.one.description'),
-        ]);
-
-        ModePostEmail::firstOrCreate([
-            'name' => trans('postman::mode.two.name'),
-            'description' => trans('postman::mode.two.description'),
-        ]);
+        foreach (config('postman.modes') as $mode) {
+            $object = (new $mode);
+            ModePostEmail::firstOrCreate([
+                'name' => $object->getName(),
+                'description' => $object->getDescription(),
+                'owner' => get_class($object)
+            ]);
+        }
     }
 }

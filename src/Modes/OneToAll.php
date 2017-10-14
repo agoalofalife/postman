@@ -34,4 +34,22 @@ class OneToAll implements Mode
             $tasks->save();
         }
     }
+
+    /**
+     *  Get name mode
+     * @return string
+     */
+    public function getName(): string
+    {
+        return trans('postman::mode.one.name');
+    }
+
+    /**
+     * Get full description
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return trans('postman::mode.one.description');
+    }
 }
