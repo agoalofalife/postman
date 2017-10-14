@@ -2,13 +2,12 @@
 namespace agoalofalife\Tests\Modes;
 
 use agoalofalife\postman\Models\SheduleEmail;
-use agoalofalife\postman\Modes\OneToAll;
-use agoalofalife\Tests\TestCase;
+use agoalofalife\postman\Modes\Each;
 use agoalofalife\postman\Models\EmailUser;
 use agoalofalife\postman\Models\User;
 use MailThief\Testing\InteractsWithMail;
 
-class OneToAllTest extends TestCase
+class EachTest
 {
     use InteractsWithMail;
 
@@ -23,8 +22,9 @@ class OneToAllTest extends TestCase
         ]);
         $task = SheduleEmail::all()->random();
 
-        (new OneToAll)->postEmail($task);
+        (new Each())->postEmail($task);
 
+        $this->seeMessageFrom(config('mail.from.address'));
         $this->seeMessageWithSubject($task->email->theme);
         $this->seeMessageFor($user->email);
     }
