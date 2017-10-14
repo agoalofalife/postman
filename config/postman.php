@@ -10,7 +10,7 @@ return [
             'mode.name' => 140,
             'status_action_human' => 130,
             'updated_at' => 140,
-            'operations' => 220,
+            'operations' => 240,
         ]
     ]
 ];

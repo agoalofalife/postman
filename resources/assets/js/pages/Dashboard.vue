@@ -24,6 +24,7 @@
                          :key="column.prop"
                          :prop="column.prop"
                              sortable
+                         :formatter="formatter"
                          :label="column.label"
                          :width="column.size"
                 >
@@ -42,6 +43,7 @@
         </el-col>
 
         <el-dialog :visible.sync="dialogFormVisible">
+
         <el-col  :span="18" :offset="3"  class="form-edit">
             <ul style="color:#FF4949" v-for="(value, key, index) in errors">
                 <li v-for="err in value">{{ err }} </li>
@@ -278,6 +280,18 @@
                     return 'positive-row';
                 }
                 return '';
+            },
+            formatter(value, cloumn, cellValue){
+//                console.log( value, cloumn, cellValue );
+//                console.log(document.getElement(cloumn['id']));
+//                console.log(document.getElementsByClassName();
+//                console.log( document.querySelectorAll('.el-table_1_column_5 > .cell') );
+//                document.getElementsByClassName(cloumn['id']).firstElementChild.innerHTML = cellValue
+                 let element = this.$createElement('div');
+                 element.raw = true;
+                 element.text = "sc";
+                 console.log( element );
+                return cellValue;
             }
         },
         mounted: function () {
