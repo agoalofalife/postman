@@ -25,12 +25,10 @@ class InstallCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle() : void
     {
         $this->call('vendor:publish', ['--tag' => 'postman-migration']);
         $this->call('migrate');
         $this->call('postman:seed');
-
-        $this->call('vendor:publish', ['--provider' => 'Themsaid\Transformers\TransformersServiceProvider']);
     }
 }

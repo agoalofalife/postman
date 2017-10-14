@@ -1,6 +1,10 @@
 <?php
 return [
     'switcher' => true,
+    'modes' => [
+        \agoalofalife\postman\Modes\OneToAll::class,
+        \agoalofalife\postman\Modes\Each::class,
+    ],
     'ui' => [
         'table' => [
             'id' => 60,

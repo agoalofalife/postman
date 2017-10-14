@@ -10,5 +10,23 @@ use agoalofalife\postman\Models\SheduleEmail;
  */
 interface Mode
 {
+    /**
+     * Implementation Mode in method
+     * @param SheduleEmail $shedule
+     * @return mixed
+     */
     public function postEmail(SheduleEmail $shedule);
+
+    /**
+     *  Get name mode
+     * @return string
+     */
+    public function getName() : string;
+
+    /**
+     * Get full description
+     * @return string
+     */
+    public function getDescription() : string;
+
 }

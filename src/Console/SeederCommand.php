@@ -31,7 +31,7 @@ class SeederCommand extends Command
      *
      * @return void
      */
-    public function handle()
+    public function handle() : void
     {
         $this->info('Seeding data into the database');
 
