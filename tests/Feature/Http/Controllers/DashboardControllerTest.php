@@ -12,14 +12,10 @@ class DashboardControllerTest extends TestCase
 {
     use InteractsWithDatabase;
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     public function testIndex() : void
     {
         factory(SheduleEmail::class, 5)->create();
+
         $this->get('/postman/api/dashboard.table.tasks')->assertJsonStructure([
             [
                 'id',

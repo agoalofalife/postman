@@ -5,5 +5,6 @@ $factory->define(agoalofalife\postman\Models\ModePostEmail::class, function (Fak
     return [
         'name' => $faker->name,
         'description' => $faker->text,
+        'owner' => collect(config('postman.modes'))->random()
     ];
 });
