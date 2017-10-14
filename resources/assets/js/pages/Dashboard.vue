@@ -24,9 +24,9 @@
                          :key="column.prop"
                          :prop="column.prop"
                              sortable
-                         :formatter="formatter"
                          :label="column.label"
                          :width="column.size"
+                         v-if="index !=3"
                 >
             </el-table-column>
             <el-table-column
@@ -281,18 +281,6 @@
                 }
                 return '';
             },
-            formatter(value, cloumn, cellValue){
-//                console.log( value, cloumn, cellValue );
-//                console.log(document.getElement(cloumn['id']));
-//                console.log(document.getElementsByClassName();
-//                console.log( document.querySelectorAll('.el-table_1_column_5 > .cell') );
-//                document.getElementsByClassName(cloumn['id']).firstElementChild.innerHTML = cellValue
-                 let element = this.$createElement('div');
-                 element.raw = true;
-                 element.text = "sc";
-                 console.log( element );
-                return cellValue;
-            }
         },
         mounted: function () {
                 this.$http.get('/postman/api/dashboard.table.column')
