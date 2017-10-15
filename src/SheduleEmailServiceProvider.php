@@ -74,7 +74,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function defineAssetPublishing()
+    public function defineAssetPublishing() : void
     {
         $this->publishes([
             POSTMAN_PATH.'/public' => public_path('vendor/horizon'),
