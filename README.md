@@ -16,7 +16,13 @@ You intrigued?
 
 Read on!
 
+## Install
+Installed via [composer](https://getcomposer.org/).
 
+```bash
+composer require agoalofalife/postman
+
+```
 
 ## Commands
 
