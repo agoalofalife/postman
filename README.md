@@ -59,6 +59,16 @@ now you can see your interface!
 
 ![postman](https://github.com/agoalofalife/postman/blob/master/start-page.jpg)
 
+And last.. You need to work **cron**.
+`App\Console\Kernel`
+
+```php
+ if (config('postman.switcher')) {
+            $schedule->command(ParseCommand::class)->everyMinute();
+        }
+        
+```
+
 ## Commands
 
 ```
