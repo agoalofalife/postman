@@ -60,7 +60,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/postman'),
         ], 'postman-migration');
         $this->publishes([
-            POSTMAN_PATH.'/public' => public_path('vendor/horizon'),
+            POSTMAN_PATH.'/public' => public_path('vendor/postman'),
         ], 'postman-assets');
 
         $this->publishes([
