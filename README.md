@@ -34,7 +34,6 @@ Before you install the package, it is important to define your language.
 In file config/app.php
 
 ```php
-
  'locale' => 'en',
 ```
 > **Note** Out of the box `en` and `ru`.
@@ -68,20 +67,60 @@ And last.. You need to work **cron**.
         }
         
 ```
+## Custom Mode
+Each letter has its own algorithm sending. Example :
+- Send all as BCC
+- Send all as CC
+For this there are routines that implement the interface
 
-## Commands
+```php
+agoalofalife\postman\Contract\Mode::class
+```
+
+You must implement all three methods:
+* getName()
+* getDescription()
+* postEmail()
+
+Of the first two all clear from the title.
+`postEmail()` within the logic of sending. 
+
+If something is not clear you can see examples in the source code.
+
+
+Once you have implemented his regime, it is necessary to specify in the configuration file and execute the command :
+```bash
+php artisan postman:seed 
+```
+
+## Config
+- You can set the column size
+
+```php
+ 'ui' => [
+        'table' => [
+            'id' => 60,
+            'date' => 180,
+            'email.theme' => 180,
+            'email.text' => 400,
+            'mode.name' => 140,
+            'status_action_human' => 130,
+            'updated_at' => 140,
+            'operations' => 240,
+        ]
+    ]
+```
+
+- List of available modes
+
+```php
+
+'modes' => [
+        \agoalofalife\postman\Modes\OneToAll::class,
+        \agoalofalife\postman\Modes\Each::class,
+    ]
+```
 
 ```
-php artisan migrate
-php artisan vendor:publish --tag=postman-migration   
-php artisan postman:seed 
-php artisan postman:install 
-
 php artisan vendor:publish --tag=postman-components
-
- if (config('posman.switcher')) {
-    $schedule->command(ParseCommand::class)->everyMinute();
-  }
-  
-  locale in config.php (seed)
 ```
