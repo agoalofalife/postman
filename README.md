@@ -38,6 +38,18 @@ Next, you're executing the command:
 ```bash
 php artisan postman:install
 ```
+Now you can insert the template where you want. 
+
+It could be your administrative panel or what else.
+
+```php
+...
+  <body>
+    @include('postman::app')
+    ...
+```
+
+![](http://joxi.ru/Dr83govIkdxQPA)
 
 ## Commands
 
@@ -54,13 +66,4 @@ php artisan vendor:publish --tag=postman-components
   }
   
   locale in config.php (seed)
-```
-
-## Blade
-
-
-```
-
-    @include('postman::app')
-
 ```
