@@ -12,6 +12,8 @@
 
 > **Note** Required PHP version >= 7.1 
 
+> Obviously, you must have configured the database and Mail
+
 **What is it?** 
 
 This package is for [Laravel](laravel.com). Using the interface you can send the emails on schedule.
