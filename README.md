@@ -1,8 +1,14 @@
-# POSTMAN
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/agoalofalife/postman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/postman/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/agoalofalife/postman/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/postman/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/agoalofalife/postman/badges/build.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/postman/build-status/master)
+<h1 align="center">POSTMAN</h1>
+
+<p align="center"><img src="https://github.com/agoalofalife/postman/blob/master/preview.jpg"></p>
+
+
+<p align="center">
+ <a href="https://scrutinizer-ci.com/g/agoalofalife/postman/?branch=master"><img src="https://scrutinizer-ci.com/g/agoalofalife/postman/badges/quality-score.png?b=master"></a>
+  <a href="https://scrutinizer-ci.com/g/agoalofalife/postman/?branch=master"><img src="https://scrutinizer-ci.com/g/agoalofalife/postman/badges/coverage.png?b=master"></a>
+ <a href="https://scrutinizer-ci.com/g/agoalofalife/postman/?branch=master"><img src="https://scrutinizer-ci.com/g/agoalofalife/postman/badges/build.png?b=master"></a>
+ </p>
 
 > **Note** Required PHP version >= 7.1 
 
@@ -49,7 +55,9 @@ It could be your administrative panel or what else.
     ...
 ```
 
-![](http://joxi.ru/Dr83govIkdxQPA)
+now you can see your interface!
+
+![postman](https://github.com/agoalofalife/postman/blob/master/start-page.jpg)
 
 ## Commands
 
