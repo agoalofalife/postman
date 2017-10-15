@@ -59,7 +59,9 @@ class SheduleEmailServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/postman'),
         ], 'postman-migration');
-
+        $this->publishes([
+            POSTMAN_PATH.'/public' => public_path('vendor/horizon'),
+        ], 'postman-assets');
 
         $this->publishes([
             __DIR__.'/../database/seeds' => database_path('seeds'),
@@ -69,19 +71,6 @@ class SheduleEmailServiceProvider extends ServiceProvider
             __DIR__.'/../resources/assets/js/components' => base_path('resources/assets/js/components/postman'),
         ], 'postman-components');
     }
-
-    /**
-     * Define the asset publishing configuration.
-     *
-     * @return void
-     */
-    public function defineAssetPublishing() : void
-    {
-        $this->publishes([
-            POSTMAN_PATH.'/public' => public_path('vendor/horizon'),
-        ], 'postman-assets');
-    }
-
 
     /**
      * Register the postman routes.
