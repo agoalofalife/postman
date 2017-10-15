@@ -1,5 +1,6 @@
 {
     "name": "agoalofalife/postman",
+    "keywords": ["laravel", "shedule", "email", "mail"],
     "description": "Schedule a task for sending e-mail",
     "type": "library",
     "license": "MIT",
