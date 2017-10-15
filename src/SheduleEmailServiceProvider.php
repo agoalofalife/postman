@@ -29,6 +29,7 @@ class SheduleEmailServiceProvider extends ServiceProvider
             Console\InstallCommand::class,
             Console\SeederCommand::class,
             Console\ParseCommand::class,
+            Console\AssetsConsole::class,
         ]);
         $this->loadViews();
 

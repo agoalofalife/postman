@@ -3,7 +3,7 @@ namespace agoalofalife\postman\Console;
 
 use Illuminate\Console\Command;
 
-class AssetsConsole  extends Command
+class AssetsConsole extends Command
 {
     /**
      * The name and signature of the console command.
