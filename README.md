@@ -120,7 +120,8 @@ php artisan postman:seed
         \agoalofalife\postman\Modes\Each::class,
     ]
 ```
-
+## Vue components
+If you don't want to set using the templating Blade, it is possible to migrate a component to vue.
 ```
 php artisan vendor:publish --tag=postman-components
 ```
