@@ -260,7 +260,8 @@
                             });
                         }
                     }).catch( response => {
-                        this.errors = response.response.data
+                        console.log( response.response.data );
+                        this.errors = response.response.data.errors || response.response.data
                 });
                 this.clickSubmit = false;
             },
