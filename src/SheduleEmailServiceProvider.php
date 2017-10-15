@@ -39,6 +39,12 @@ class SheduleEmailServiceProvider extends ServiceProvider
         $this->publishesAll();
     }
 
+    public function register()
+    {
+        if (! defined('POSTMAN_PATH')) {
+            define('POSTMAN_PATH', realpath(__DIR__.'/../'));
+        }
+    }
     public function publishesAll() : void
     {
         $this->publishes([
@@ -62,6 +68,20 @@ class SheduleEmailServiceProvider extends ServiceProvider
             __DIR__.'/../resources/assets/js/components' => base_path('resources/assets/js/components/postman'),
         ], 'postman-components');
     }
+
+    /**
+     * Define the asset publishing configuration.
+     *
+     * @return void
+     */
+    public function defineAssetPublishing()
+    {
+        $this->publishes([
+            POSTMAN_PATH.'/public' => public_path('vendor/horizon'),
+        ], 'postman-assets');
+    }
+
+
     /**
      * Register the postman routes.
      *
