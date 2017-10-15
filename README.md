@@ -33,12 +33,6 @@ In file config/app.php
 ```
 > **Note** Out of the box `en` and `ru`.
 
-To set the service provider in config/app.php:
-
-```php
-agoalofalife\postman\SheduleEmailServiceProvider::class
-```
-
 Next, you're executing the command:
 
 ```bash
