@@ -12,6 +12,8 @@
 
 > **Note** Required PHP version >= 7.1 
 
+> Obviously, you must have configured the database and Mail
+
 **What is it?** 
 
 This package is for [Laravel](laravel.com). Using the interface you can send the emails on schedule.
@@ -88,7 +90,7 @@ Of the first two all clear from the title.
 If something is not clear you can see examples in the source code.
 
 
-Once you have implemented his regime, it is necessary to specify in the configuration file and execute the command :
+Once you have implemented his mode, it is necessary to specify in the configuration file and execute the command :
 ```bash
 php artisan postman:seed 
 ```
