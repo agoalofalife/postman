@@ -23,6 +23,27 @@ Installed via [composer](https://getcomposer.org/).
 composer require agoalofalife/postman
 
 ```
+Before you install the package, it is important to define your language.
+
+In file config/app.php
+
+```php
+
+ 'locale' => 'en',
+```
+> **Note** Out of the box `en` and `ru`.
+
+To set the service provider in config/app.php:
+
+```php
+agoalofalife\postman\SheduleEmailServiceProvider::class
+```
+
+Next, you're executing the command:
+
+```bash
+php artisan postman:install
+```
 
 ## Commands
 
