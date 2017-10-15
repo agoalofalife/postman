@@ -127,3 +127,16 @@ If you don't want to set using the templating Blade, it is possible to migrate a
 ```
 php artisan vendor:publish --tag=postman-components
 ```
+
+## Middleware
+You can define your rules in config file.
+```php
+
+  /*
+     |--------------------------------------------------------------------------
+     | Middleware
+     |--------------------------------------------------------------------------
+     | Set middleware
+     */
+     'middleware' => '',
+```
