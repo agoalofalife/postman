@@ -40,6 +40,13 @@ In file config/app.php
 ```
 > **Note** Out of the box `en` and `ru`.
 
+> if if your version is below laravel 5.5. insert service provider :
+
+```php
+...
+agoalofalife\postman\SheduleEmailServiceProvider::class
+```
+
 Next, you're executing the command:
 
 ```bash
