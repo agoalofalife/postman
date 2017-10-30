@@ -21,12 +21,11 @@ return [
     'email' => 'Email пользователя',
     'name' => 'Имя пользователя',
 
-       // transformer
-    'status_action.1' => 'Сделано',
-    'status_action.0' => 'В процессе',
-
     'form.button.success' => 'Добавить',
     'form.button.cancel' => 'Отмена',
+
+    'statuses.name' => "Статус",
+    'statuses.placeholder' => 'Выберите статус',
 
     'popup.question' => 'Вы уверены что хотите удалить?',
     'popup.title' => 'Вопрос',

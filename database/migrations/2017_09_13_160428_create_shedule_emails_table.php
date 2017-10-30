@@ -18,9 +18,12 @@ class CreateSheduleEmailsTable extends Migration
             $table->timestamp('date');
             $table->integer('email_id')->unsigned();
             $table->foreign('email_id')->references('id')->on('emails');
+
             $table->integer('mode_id')->unsigned();
             $table->foreign('mode_id')->references('id')->on('mode_post_emails');
-            $table->boolean('status_action')->default('0')->comment('status post email');
+
+            $table->integer('status_id')->unsigned();
+            $table->foreign('status_id')->references('id')->on('statuses')->comment('status post email');
             $table->timestamps();
             $table->softDeletes();
         });

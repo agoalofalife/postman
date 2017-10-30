@@ -7,6 +7,7 @@ use agoalofalife\postman\Models\Email;
 use agoalofalife\postman\Models\EmailUser;
 use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
+use agoalofalife\postman\Models\Status;
 use agoalofalife\postman\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,6 +43,14 @@ class DashboardController
     public function users() : JsonResponse
     {
         return response()->json(User::all());
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function statuses() : JsonResponse
+    {
+        return response()->json(Status::all());
     }
 
     /**
@@ -95,6 +104,10 @@ class DashboardController
                 'label' => trans('postman::dashboard.users.name'),
                 'placeholder' => trans('postman::dashboard.users.placeholder'),
             ],
+           'statuses' => [
+               'label' => trans('postman::dashboard.statuses.name'),
+               'placeholder' => trans('postman::dashboard.statuses.placeholder'),
+           ],
             'button' => [
                 'success' => trans('postman::dashboard.form.button.success'),
                 'cancel' => trans('postman::dashboard.form.button.cancel'),

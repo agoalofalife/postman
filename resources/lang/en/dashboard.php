@@ -21,13 +21,11 @@ return [
     'email' => 'Email user',
     'name' => 'Name user',
 
-    // transformer
-    'status_action.1' => 'Done',
-    'status_action.0' => 'In process',
-
     'form.button.success' => 'Save',
     'form.button.cancel' => 'Cancel',
 
+    'statuses.name' => "Status",
+    'statuses.placeholder' => 'Choose status',
 
     'popup.question' => 'Are you sure you want to remove?',
     'popup.title' => 'Window',

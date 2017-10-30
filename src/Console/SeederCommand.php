@@ -4,11 +4,13 @@ namespace agoalofalife\postman\Console;
 
 use Illuminate\Console\Command;
 use ModePostEmailSeeder;
+use StatusesSeeder;
 
 class SeederCommand extends Command
 {
     protected $seeds = [
-        ModePostEmailSeeder::class
+        ModePostEmailSeeder::class,
+        StatusesSeeder::class
     ];
 
     protected $seedersPath = __DIR__.'/../../database/seeds/';

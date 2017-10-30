@@ -60,6 +60,22 @@
                     <vue-html5-editor :content="form.text" :height="200" @change="updateFormText($event)" :show-module-name="false"></vue-html5-editor>
                 </el-form-item>
 
+                <el-form-item :label="formText.statuses.label" prop="text">
+                    <el-select
+                            v-model="form.users"
+                            multiple
+                            filterable
+                            allow-create
+                            :placeholder="formText.statuses.placeholder">
+                        <el-option
+                                v-for="user in users"
+                                :key="user.id"
+                                :label="user.email"
+                                :value="user.id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+
                 <el-form-item :label="formText.users.label" prop="text">
                 <el-select
                         v-model="form.users"
@@ -132,6 +148,7 @@
         text: '',
         mode: '',
         users:'',
+        statuses:'',
     };
     export default {
         data() {
@@ -152,6 +169,7 @@
                 },
                 errorMessage:'',
                 users:[],
+                statuses:[],
                 clickSubmit:false,
                 dialogFormVisible:false,
                 formText:{
@@ -184,6 +202,7 @@
                     text: '',
                     mode: '',
                     users:[],
+                    statuses:[],
                 },
                 normalizeDate : function (date) {
                     return moment(this.form.date).format('YYYY-MM-DD HH:mm:ss')
@@ -211,7 +230,7 @@
                 this.form.theme = row.email.theme;
                 this.form.text  = row.email.text;
                 this.form.mode  = row.mode.id;
-                this.form.users =  Object.keys(row.email.users ).map(function(key) {
+                this.form.users =  Object.keys(row.email.users).map(function(key) {
                     return row.email.users[key]['id'];
                 });
                 //set in mode "edit"
@@ -295,6 +314,10 @@
              this.$http.get('/postman/api/dashboard.table.users')
                 .then(response => {
                     this.users =  response.data;
+                });
+            this.$http.get('/postman/api/dashboard.table.statuses')
+                .then(response => {
+                    this.statuses =  response.data;
                 });
         },
         created: function () {

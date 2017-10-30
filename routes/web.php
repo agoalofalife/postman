@@ -8,6 +8,7 @@ Route::prefix('api')->group(function () {
     Route::get('dashboard.table.formColumn', 'DashboardController@formColumn');
     Route::get('dashboard.table.tasks', 'DashboardController@index');
     Route::get('dashboard.table.users', 'DashboardController@users');
+    Route::get('dashboard.table.statuses', 'DashboardController@statuses');
     Route::get('dashboard.table.listMode', 'DashboardController@listMode');
 
     Route::post('dashboard.table.tasks.create', 'DashboardController@createTask');
