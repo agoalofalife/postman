@@ -18,7 +18,22 @@ return [
      | Set middleware
      */
      'middleware' => '',
-
+     /*
+      |--------------------------------------------------------------------------
+      | Templates Email
+      |--------------------------------------------------------------------------
+      | Set template emails
+      */
+     'templates' => [
+         \agoalofalife\postman\Modes\Each::class => [
+             'name_template' => 'postman::email',
+             'variable' => 'html'
+         ],
+         \agoalofalife\postman\Modes\OneToAll::class => [
+             'name_template' => 'postman::email',
+             'variable' => 'html'
+         ],
+     ],
       /*
       |--------------------------------------------------------------------------
       | Sizes table

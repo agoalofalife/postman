@@ -15,7 +15,8 @@ class Each implements Mode
      */
     public function postEmail(SheduleEmail $tasks)
     {
-        Mail::send('postman::email', ['html' => $tasks->email->text], function($message)  use ($tasks) {
+        $template = config('postman.templates.'.get_class($this));
+        Mail::send($template['name_template'], [$template['variable'] => $tasks->email->text], function($message)  use ($tasks) {
             $message->subject($tasks->email->theme);
             $message->from(config('mail.from.address'));
             $message->to($tasks->email->users->map(function($value){ return $value->email;})->toArray());
