@@ -20,6 +20,7 @@ class StatusesSeeder extends Seeder
                 'name' => $status['name'],
                 'description' => $status['description'],
                 'color_rgb' => $status['color_rgb'],
+                Status::COLUMN_UNIQUE_NAME => $status['unique_name'],
             ]);
         }
     }

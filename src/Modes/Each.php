@@ -3,6 +3,7 @@ namespace agoalofalife\postman\Modes;
 
 use agoalofalife\postman\Contract\Mode;
 use agoalofalife\postman\Models\SheduleEmail;
+use agoalofalife\postman\Models\Status;
 use Illuminate\Support\Facades\Mail;
 
 class Each implements Mode
@@ -21,7 +22,7 @@ class Each implements Mode
 
         // if to reached the sender
         if (empty(Mail::failures())) {
-            $tasks->status_action = 1;
+            $tasks->status_id = Status::done();
             $tasks->save();
         }
     }

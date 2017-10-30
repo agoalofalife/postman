@@ -18,7 +18,7 @@
             :data="tableData"
             border
             style="width: 100%"
-            :row-class-name="tableRowClassName"
+            :row-style="tableRowStyle"
             >
             <el-table-column v-for="(column, index) in columns"
                          :key="column.prop"
@@ -115,13 +115,6 @@
     }
     .form-edit{
         margin-top: 2%
-    }
-    .el-table .info-row {
-        background: #c9e5f5;
-    }
-
-    .el-table .positive-row {
-        background: #e2f0e4;
     }
 </style>
 
@@ -292,17 +285,15 @@
             },
             createTask(){
                 this.form = Object.assign(this.form, stubForm);
+                this.form.statuses = this.statuses[0].id;
                 this.dialogFormVisible = true;
                 this.modeWindow = modeWindow['create']
             },
             updateFormText($event){
                 this.form.text = $event;
             },
-            tableRowClassName(row, index){
-                if (row.status_action == 1) {
-                    return 'positive-row';
-                }
-                return '';
+            tableRowStyle(row, index){
+                return ' background: ' + row.status.color_rgb
             },
         },
         mounted: function () {

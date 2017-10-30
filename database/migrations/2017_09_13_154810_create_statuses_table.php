@@ -21,6 +21,7 @@ class CreateStatusesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('color_rgb');
+            $table->string('unique_name');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -6,6 +6,7 @@ use agoalofalife\postman\Models\ModePostEmail;
 use agoalofalife\postman\Models\SheduleEmail;
 use agoalofalife\Tests\TestCase;
 use agoalofalife\postman\Models\User;
+use agoalofalife\postman\Models\Status;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 
 class DashboardControllerTest extends TestCase
@@ -22,7 +23,16 @@ class DashboardControllerTest extends TestCase
                 'date',
                 'email_id',
                 'mode_id',
-                'status_action',
+                'status_id',
+                'status' => [
+                   'color_rgb',
+                    'created_at',
+                    'deleted_at',
+                    'description',
+                    'id',
+                    'name',
+                    'updated_at'
+                ],
                 'email' => [
                     'id',
                     'theme',
@@ -65,6 +75,22 @@ class DashboardControllerTest extends TestCase
              'remember_token',
              'created_at',
              'updated_at',
+            ]
+        ])->assertStatus(200);
+    }
+
+    public function testStatuses() : void
+    {
+        $this->artisan('postman:seed');
+        $this->get('/postman/api/dashboard.table.statuses')->assertJsonStructure([
+            '*' => [
+                'id',
+                'name',
+                'description',
+                'unique_name',
+                'color_rgb',
+                'created_at',
+                'updated_at',
             ]
         ])->assertStatus(200);
     }
@@ -130,6 +156,7 @@ class DashboardControllerTest extends TestCase
     public function testCreateTask() : void
     {
         $users = factory(User::class, 3)->create()->map(function ($value) {return $value->id;});
+        $status_id = factory(Status::class)->create()->id;
         $this->artisan('postman:seed');
 
         $theme = $this->faker()->word;
@@ -142,6 +169,7 @@ class DashboardControllerTest extends TestCase
             'users' => $users->toArray(),
             'date' => $date,
             'mode' => $mode,
+            'statuses' => $status_id,
         ])->assertJson([
             'status' => true,
         ]);
@@ -158,13 +186,14 @@ class DashboardControllerTest extends TestCase
         $this->assertDatabaseHas('shedule_emails', [
             'date' => $date,
             'mode_id' => $mode,
-            'status_action' => 0
+            'status_id' => $status_id,
         ]);
     }
 
     public function testUpdateTask() : void
     {
         $task = factory(SheduleEmail::class)->create();
+        $status_id = factory(Status::class)->create()->id;
         $theme = $this->faker()->word;
         $text  = $this->faker()->text;
         $mode  = ModePostEmail::all()->random()->id;
@@ -177,7 +206,8 @@ class DashboardControllerTest extends TestCase
             'date' => $date,
             'theme' => $theme,
             'text' => $text,
-            'users' => $users->toArray()
+            'users' => $users->toArray(),
+            'statuses' => $status_id,
         ])->assertJson([
             'status' => true,
         ]);
@@ -185,6 +215,7 @@ class DashboardControllerTest extends TestCase
         $this->assertDatabaseHas('shedule_emails', [
             'mode_id' => $mode,
             'date' => $date,
+            'status_id' => $status_id,
         ]);
         $this->assertDatabaseHas('emails', [
             'theme' => $theme,

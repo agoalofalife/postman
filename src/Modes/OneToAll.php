@@ -5,6 +5,7 @@ use agoalofalife\postman\Contract\Mode;
 
 use Illuminate\Support\Facades\Mail;
 use agoalofalife\postman\Models\SheduleEmail;
+use agoalofalife\postman\Models\Status;
 
 /**
  * Class OneToAll
@@ -30,7 +31,7 @@ class OneToAll implements Mode
 
         // if to reached the sender
         if (empty(Mail::failures())) {
-            $tasks->status_action = 1;
+            $tasks->status_id = Status::done();
             $tasks->save();
         }
     }

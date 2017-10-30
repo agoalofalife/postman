@@ -6,13 +6,15 @@ use agoalofalife\postman\Modes\Each;
 use agoalofalife\postman\Models\EmailUser;
 use agoalofalife\postman\Models\User;
 use MailThief\Testing\InteractsWithMail;
+use agoalofalife\Tests\TestCase;
 
-class EachTest
+class EachTest extends TestCase
 {
     use InteractsWithMail;
 
     public function testPostEmail() : void
     {
+        $this->artisan('postman:seed');
         $email =  factory(SheduleEmail::class)->create();
         $user  = factory(User::class)->create();
 
