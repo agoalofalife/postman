@@ -12,7 +12,7 @@ return [
     'users.name' => 'Пользователи',
     'users.placeholder' => 'Выбрать',
 
-    'status_action_human' => 'Статус',
+    'status.name' => 'Статус',
     'updated_at' => 'Активность',
     'button.edit' => 'Редактировать',
     'button.remove' => 'Удалить',

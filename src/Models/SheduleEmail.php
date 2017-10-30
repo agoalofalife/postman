@@ -9,36 +9,7 @@ class SheduleEmail extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['date' , 'email_id', 'mode_id', 'status_action'];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'status_action' => 'boolean',
-    ];
-
-    /**
-     * Get the status action.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getStatusActionAttribute($value) : string
-    {
-        return $value;
-    }
-
-    /**
-     * @param $value
-     * @return string
-     */
-    public function getStatusActionHumanAttribute($value) : string
-    {
-        return trans("postman::dashboard.status_action." . $this->status_action);
-    }
+    protected $fillable = ['date' , 'email_id', 'mode_id', 'status_id'];
 
     public function email()
     {
@@ -48,5 +19,10 @@ class SheduleEmail extends Model
     public function mode()
     {
         return $this->belongsTo(ModePostEmail::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

@@ -62,16 +62,14 @@
 
                 <el-form-item :label="formText.statuses.label" prop="text">
                     <el-select
-                            v-model="form.users"
-                            multiple
+                            v-model="form.statuses"
                             filterable
-                            allow-create
                             :placeholder="formText.statuses.placeholder">
                         <el-option
-                                v-for="user in users"
-                                :key="user.id"
-                                :label="user.email"
-                                :value="user.id">
+                                v-for="status in statuses"
+                                :key="status.id"
+                                :label="status.name"
+                                :value="status.id">
                         </el-option>
                     </el-select>
                 </el-form-item>
@@ -81,7 +79,6 @@
                         v-model="form.users"
                         multiple
                         filterable
-                        allow-create
                         :placeholder="formText.users.placeholder">
                     <el-option
                             v-for="user in users"
@@ -190,6 +187,10 @@
                         placeholder:'Choose',
                         label :'Users'
                     },
+                    statuses :{
+                        placeholder:'Choose',
+                        label :'Statuses'
+                    },
                     button : {
                         success : 'Success',
                         cancel:'Cancel',
@@ -233,6 +234,7 @@
                 this.form.users =  Object.keys(row.email.users).map(function(key) {
                     return row.email.users[key]['id'];
                 });
+                this.form.statuses =  row.status.id;
                 //set in mode "edit"
                 this.modeWindow = modeWindow['edit']
             },
@@ -271,6 +273,7 @@
                     text : this.form.text,
                     mode : this.form.mode,
                     users:this.form.users,
+                    statuses:this.form.statuses,
                 }).then(response => {
                         if (response.data.status) {
                             this.syncData().then(() => {

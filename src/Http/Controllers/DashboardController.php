@@ -20,12 +20,7 @@ class DashboardController
      */
     public function index() : Collection
     {
-        $preData = SheduleEmail::with(['email.users', 'mode'])->get()->map(function ($value) {
-             $value->status_action_human = $value->status_action_human;
-             return $value;
-        });
-
-        return $preData;
+        return SheduleEmail::with(['email.users', 'mode', 'status'])->get();
     }
 
     /**
@@ -148,8 +143,9 @@ class DashboardController
         $email->tasks()->create([
             'date' => $request->date,
             'mode_id' => $request->mode,
-            'status_action' => 0
+            'status_id' => $request->statuses
         ]);
+
         return response()->json(['status' => true]);
     }
 
@@ -162,10 +158,13 @@ class DashboardController
     {
         $request->datePostman($request);
         $task = SheduleEmail::find($request->id);
+
         $task->update([
             'mode_id' => $request->mode,
             'date' => $request->date,
+            'status_id' => $request->statuses,
         ]);
+
         $task->email->update([
             'theme' => $request->theme,
             'text' => $request->text,
