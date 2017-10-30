@@ -19,11 +19,10 @@ class OneToAll implements Mode
      */
     public function postEmail(SheduleEmail $tasks) : void
     {
-         Mail::raw($tasks->email->text, function ($message) use ($tasks) {
+        Mail::send('postman::email', ['html' => $tasks->email->text], function($message)  use ($tasks) {
             $message->subject($tasks->email->theme);
             $message->from(config('mail.from.address'));
             $message->to(config('mail.from.address'));
-
             $tasks->email->users->each(function ($value) use ($message) {
                 $message->bcc($value->email);
             });
@@ -31,7 +30,7 @@ class OneToAll implements Mode
 
         // if to reached the sender
         if (empty(Mail::failures())) {
-            $tasks->status_id = Status::done();
+            $tasks->status_id = 1;
             $tasks->save();
         }
     }

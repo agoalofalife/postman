@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Mail;
 class Each implements Mode
 {
     /**
+     * @link https://github.com/laravel/framework/issues/10235
      * @param SheduleEmail $tasks
      * @return mixed|void
      */
     public function postEmail(SheduleEmail $tasks)
     {
-        Mail::raw($tasks->email->text, function ($message) use ($tasks) {
-        $message->subject($tasks->email->theme);
-        $message->from(config('mail.from.address'));
-        $message->to($tasks->email->users->map(function($value){ return $value->email;})->toArray());
-    });
+        Mail::send('postman::email', ['html' => $tasks->email->text], function($message)  use ($tasks) {
+            $message->subject($tasks->email->theme);
+            $message->from(config('mail.from.address'));
+            $message->to($tasks->email->users->map(function($value){ return $value->email;})->toArray());
+        });
 
         // if to reached the sender
         if (empty(Mail::failures())) {
