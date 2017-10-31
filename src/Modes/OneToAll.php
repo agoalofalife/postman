@@ -30,7 +30,7 @@ class OneToAll implements Mode
 
         // if to reached the sender
         if (empty(Mail::failures())) {
-            $tasks->status_id = 1;
+            $tasks->status_id = Status::done();
             $tasks->save();
         }
     }
