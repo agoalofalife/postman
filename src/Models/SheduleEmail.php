@@ -23,6 +23,6 @@ class SheduleEmail extends Model
 
     public function status()
     {
-        return $this->belongsTo(Status::class, 'status_action');
+        return $this->belongsTo(Status::class);
     }
 }
