@@ -44,7 +44,7 @@
 
         <el-dialog :visible.sync="dialogFormVisible">
 
-        <el-col  :span="18" :offset="3"  class="form-edit">
+        <el-col  :span="22" class="form-edit">
             <ul style="color:#FF4949" v-for="(value, key, index) in errors">
                 <li v-for="err in value">{{ err }} </li>
             </ul>
